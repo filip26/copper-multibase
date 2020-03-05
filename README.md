@@ -5,8 +5,8 @@ Just another variation on Base32 encoding.
 ### Goals
 - ``URL`` / ``URI`` / ``IRI`` safe
 - one case letters and digits only
-- low transcription error rate (I and O letters)  
-- low risk of accidental profanity (A and U letters)
+- low transcription error rate
+- low risk of accidental profanity
 
 ### Examples
 ```java
@@ -29,3 +29,4 @@ Base32Id.decodeLong("iphone") == Base32Id.decodeLong("1PH0NE") : 784554339
 	'Y', 'Z',
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
 ```
+Letters A,I,O and U are excluded.
