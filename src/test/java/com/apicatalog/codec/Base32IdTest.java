@@ -12,8 +12,8 @@ public class Base32IdTest {
 
     @Test
     public void testAlphabet() {
-    	Assert.assertEquals("D", Base32Id.encodeLong(2));
-    	Assert.assertEquals("0", Base32Id.encodeLong(22));
+    	Assert.assertEquals("N", Base32Id.encodeLong(2));
+    	Assert.assertEquals("S", Base32Id.encodeLong(22));
     	Assert.assertEquals("9", Base32Id.encodeLong(31));
     }
 
