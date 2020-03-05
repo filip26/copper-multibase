@@ -18,7 +18,7 @@ Base32Id.decode("73ZWTB")    : 1000000000
 Base32Id.decode("CBBBBBBB")  : 34359738368l
 
 
-Base32Id.decode("iphone") = Base32Id.decode("1PH0NE") : 784554339
+Base32Id.decode("iphone") == Base32Id.decode("1PH0NE") : 784554339
 ```
 
 ### Alphabet

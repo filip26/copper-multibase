@@ -57,6 +57,12 @@ public class Base32IdTest {
     	encodeDecode(Long.MAX_VALUE);
     }
 
+    @Test
+    public void testAutoCorrection() {
+    	Assert.assertEquals(Base32Id.decode("1PH0NE"), Base32Id.decode("iphone"));
+    }
+
+    
     static void encodeDecode(Long number) {
     	
     	final String e1 = Base32Id.encode(number);
