@@ -61,7 +61,33 @@ public class Base32IdTest {
     public void testAutoCorrection() {
     	Assert.assertEquals(Base32Id.decodeLong("1PH0NE"), Base32Id.decodeLong("iphone"));
     }
+    
+    @Test
+    public void testExcludedLettersAU() {
+    	try {
+    		Base32Id.decodeLong("AU");
+    		Assert.fail();
+    	} catch (IllegalArgumentException e) {
+    	}
+    }
 
+    @Test
+    public void testExcludedLettersA() {
+    	try {
+    		Base32Id.decodeLong("A");
+    		Assert.fail();
+    	} catch (IllegalArgumentException e) {
+    	}
+    }
+
+    @Test
+    public void testExcludedLettersU() {
+    	try {
+    		Base32Id.decodeLong("U");
+    		Assert.fail();
+    	} catch (IllegalArgumentException e) {
+    	}
+    }
     
     static void encodeDecode(Long number) {
     	
