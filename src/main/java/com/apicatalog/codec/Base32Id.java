@@ -17,7 +17,7 @@ public class Base32Id {
 		
 	final static int MAX_ENCODED_LONG_SIZE = 13;
 	 
-	public final static String encode(long numericId) {
+	public final static String encodeLong(long numericId) {
 
 		if (numericId < 0) {
 			throw new IllegalArgumentException("An identifier [" + numericId + "] must be equal or greater than zero.");
@@ -47,7 +47,7 @@ public class Base32Id {
 		return String.copyValueOf(chars, MAX_ENCODED_LONG_SIZE - index, index);
 	}
 	
-	public static final Long decode(String encoded) {
+	public static final Long decodeLong(String encoded) {
 
 		if (StringUtils.isBlank(encoded)) {
 			throw new IllegalArgumentException("Encoded number must not be a null");

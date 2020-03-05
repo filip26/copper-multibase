@@ -12,9 +12,9 @@ public class Base32IdTest {
 
     @Test
     public void testAlphabet() {
-    	Assert.assertEquals("D", Base32Id.encode(2));
-    	Assert.assertEquals("0", Base32Id.encode(22));
-    	Assert.assertEquals("9", Base32Id.encode(31));
+    	Assert.assertEquals("D", Base32Id.encodeLong(2));
+    	Assert.assertEquals("0", Base32Id.encodeLong(22));
+    	Assert.assertEquals("9", Base32Id.encodeLong(31));
     }
 
     @Test
@@ -47,8 +47,8 @@ public class Base32IdTest {
     
     @Test
     public void testLength()  {
-    	Assert.assertEquals(1, Base32Id.encode(31l).length());
-    	Assert.assertEquals(13, Base32Id.encode(Long.MAX_VALUE).length());
+    	Assert.assertEquals(1, Base32Id.encodeLong(31l).length());
+    	Assert.assertEquals(13, Base32Id.encodeLong(Long.MAX_VALUE).length());
     }
     
     @Test
@@ -59,18 +59,18 @@ public class Base32IdTest {
 
     @Test
     public void testAutoCorrection() {
-    	Assert.assertEquals(Base32Id.decode("1PH0NE"), Base32Id.decode("iphone"));
+    	Assert.assertEquals(Base32Id.decodeLong("1PH0NE"), Base32Id.decodeLong("iphone"));
     }
 
     
     static void encodeDecode(Long number) {
     	
-    	final String e1 = Base32Id.encode(number);
+    	final String e1 = Base32Id.encodeLong(number);
     	Assert.assertNotNull(e1);
     	
     	System.out.println("encode(" + number + "l) = " + e1 +  "\t ("  + String.format("%.2f", 100*((double)e1.length() / (double)(Long.toString(number).length()))) + "%)");
     	
-    	final Long d1 = Base32Id.decode(e1);
+    	final Long d1 = Base32Id.decodeLong(e1);
     	Assert.assertNotNull(d1);
     	Assert.assertEquals(number, d1);
     }

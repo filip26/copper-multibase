@@ -10,6 +10,12 @@
     <groupId>com.apicatalog</groupId>
     <version>1.1</version>
     <packaging>jar</packaging>
+
+	<name>Base32Id</name>
+  	<description>
+  		Just another variation on Base32 encoding.
+    </description>
+    <url>https://github.com/filip26/base32id</url>
     
     <licenses>
         <license>
@@ -17,6 +23,12 @@
             <url>http://apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>    
+
+    <scm>
+        <connection>scm:git:git://github.com/filip26/base32id.git</connection>
+        <developerConnection>scm:git:git://github.com/filip26/base32id.git</developerConnection>
+        <url>https://github.com/filip26/base32id</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
@@ -48,7 +60,20 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin>  
+            </plugin>
+   			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>             
 		</plugins>
     </build>
 </project>
