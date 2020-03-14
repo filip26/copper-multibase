@@ -4,7 +4,9 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Base32Id {
 
-	final static char[] ALPHABET = new char[] {
+	Base32Id() {}
+	
+	static final char[] ALPHABET = new char[] {
 			'Y', 'B', 'N', 'D', 'R',
 			'F', 'G', '8', 'E', 'J',
 			'K', 'M', 'C', 'P', 'Q', 
@@ -14,7 +16,7 @@ public class Base32Id {
 			'6', '9', 
 	};
 	
-	final static int[] ALPHA_INDEX = new int[] {
+	static final int[] ALPHA_INDEX = new int[] {
 			-1,  1, 12,  3,  8,		// A B C D E
 			 5,  6, 28, -1,  9, 	// F G H I J
 			10, 21, 11,  2, -1, 	// K L M N O
@@ -23,14 +25,14 @@ public class Base32Id {
 			23,				 		// Z
 	};	
 	
-	final static int[] NUM_INDEX = new int[] {
+	static final int[] NUM_INDEX = new int[] {
 			16, 18, 24, 25, 26,		// 0 1 2 3 4
 			27, 30, 29,  7, 31		// 5 6 7 8 9
 	};
 		
-	final static int MAX_ENCODED_LONG_SIZE = 13;
+	static final int MAX_ENCODED_LONG_SIZE = 13;
 	 
-	public final static String encodeLong(long numericId) {
+	public static final String encodeLong(long numericId) {
 
 		if (numericId < 0) {
 			throw new IllegalArgumentException("An identifier [" + numericId + "] must be equal or greater than zero.");
