@@ -10,7 +10,7 @@ Just another variation on Base32 encoding.
 
 ### Examples
 ```java
-Base32Id.encodeLong(14348907l)     		: "PLHVM"
+Base32Id.encodeLong(14348907l)     	: "PLHVM"
 Base32Id.encodeLong(205891132094649l) 	: "F5E8BHW6F3"
 
 Base32Id.decodeLong("JKYZ3YY") : 10000000000l
