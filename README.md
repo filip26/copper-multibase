@@ -1,9 +1,9 @@
-![Java CI with Maven](https://github.com/filip26/base32id/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+![Java CI with Maven](https://github.com/filip26/id32/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## Base32Id encoder/decoder.
+## Id32 encoder/decoder.
 
-Just another variation on Base32 encoding.
+Just another variation on Base32 encoding. Numeric id shortener.
 
 ### Goals
 - ``URL`` / ``URI`` / ``IRI`` safe
@@ -13,14 +13,14 @@ Just another variation on Base32 encoding.
 
 ### Examples
 ```java
-Base32Id.encodeLong(14348907l)     	: "PLHVM"
-Base32Id.encodeLong(205891132094649l) 	: "F5E8BHW6F3"
+Id32.encodeLong(14348907l)     	: "PLHVM"
+Id32.encodeLong(205891132094649l) 	: "F5E8BHW6F3"
 
-Base32Id.decodeLong("JKYZ3YY") : 10000000000l
-Base32Id.decodeLong("BYYYYY")  : 33554432l
+Id32.decodeLong("JKYZ3YY") : 10000000000l
+Id32.decodeLong("BYYYYY")  : 33554432l
 
-Base32Id.decodeLong("iphone") == Base32Id.decodeLong("1PH0NE") : 618545224
-Base32Id.decodeLong("AU") throws IllegalArgumentException
+Id32.decodeLong("iphone") == Id32.decodeLong("1PH0NE") : 618545224
+Id32.decodeLong("AU") throws IllegalArgumentException
 ```
 
 ### Alphabet

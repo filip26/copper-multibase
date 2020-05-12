@@ -1,8 +1,8 @@
 package com.apicatalog.codec;
 
-public class Base32Id {
+public class Id32 {
 
-	Base32Id() {}
+	Id32() {}
 	
 	static final char[] ALPHABET = new char[] {
 			'Y', 'B', 'N', 'D', 'R',
