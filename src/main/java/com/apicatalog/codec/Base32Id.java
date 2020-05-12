@@ -1,7 +1,5 @@
 package com.apicatalog.codec;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class Base32Id {
 
 	Base32Id() {}
@@ -64,8 +62,8 @@ public class Base32Id {
 	
 	public static final Long decodeLong(String encoded) {
 
-		if (StringUtils.isBlank(encoded)) {
-			throw new IllegalArgumentException("Encoded number must not be a null");
+		if (encoded == null || encoded.length() == 0) {
+			throw new IllegalArgumentException("Encoded number must not be a null nor an empty string");
 		}
 		if (encoded.length() > MAX_ENCODED_LONG_SIZE) {
 			throw new IllegalArgumentException("Encoded number length (" + encoded.length() + ") exceeds maximal allowed length (" + MAX_ENCODED_LONG_SIZE + "), input='" + encoded + "'");
