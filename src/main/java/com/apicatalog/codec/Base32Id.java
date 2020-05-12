@@ -69,8 +69,8 @@ public class Base32Id {
 			throw new IllegalArgumentException("Encoded number length (" + encoded.length() + ") exceeds maximal allowed length (" + MAX_ENCODED_LONG_SIZE + "), input='" + encoded + "'");
 		}
 
-		Long number = 0l;
-		Long exponent = 1l;
+		long number = 0l;
+		long exponent = 1l;
 		
 		for (int index=encoded.length() - 1; index >= 0; index--) {
 			
