@@ -1,9 +1,9 @@
+![Java CI with Maven](https://github.com/filip26/base32id/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 ## Base32Id encoder/decoder.
 
 Just another variation on Base32 encoding.
-
-![Java CI with Maven](https://github.com/filip26/base32id/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### Goals
 - ``URL`` / ``URI`` / ``IRI`` safe
