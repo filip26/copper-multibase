@@ -61,30 +61,10 @@ public final class Id32 {
        
        for (int index=encoded.length() - 1; index >= 0; index--) {
            
-           char ch = encoded.charAt(index);
-           
-           if (ch >= 'a' && ch <= 'z') {
-               ch = Character.toUpperCase(ch);
-           }
-           
-           if (ch == 'I') {
-               ch = '1';
-               
-           } else if (ch == 'O') {
-               ch = '0';
-           } 
-           
-           int value = -1;
+           final char ch = encoded.charAt(index);
+                      
+           final int value = alphabet.indexOf(ch);
 
-           if (ch >= 'A' && ch <= 'Z') {
-               
-               value = alphabet.alphas[ch - 'A'];
-   
-           } else if (ch >= '0' && ch <= '9') {
-               
-               value = alphabet.numbers[ch - '0'];
-               
-           }
            if (value == -1) {
                throw new IllegalArgumentException("Unsupported character '" + ch + "', index=" + encoded.length() + ", input='" + encoded + "'");
            }
@@ -167,6 +147,31 @@ public final class Id32 {
 
        public char[] characters() {
            return characters;
+       }
+       
+       public int indexOf(final char ch) {
+
+           if (ch == 'I' || ch == 'i') { // I,i -> 1
+               return numbers[1];
+           } 
+           
+           if (ch == 'O' || ch == 'o') { // O,o -> 0
+               return numbers[0];
+           } 
+           
+           if (ch >= 'A' && ch <= 'Z') {
+               return alphas[ch - 'A'];
+           }
+
+           if (ch >= 'a' && ch <= 'z') {
+               return alphas[ch - 'a'];
+           }
+
+           if (ch >= '0' && ch <= '9') {    
+               return numbers[ch - '0'];
+           }
+           
+           return -1;
        }
    }
 }
