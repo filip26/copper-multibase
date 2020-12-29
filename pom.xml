@@ -14,7 +14,7 @@
 	<name>Id32</name>
 	
   	<description>
-  		Just another variation on Base32 encoding. Numeric id shortener.
+  		Just another numeric id shortener
     </description>
     
     <url>https://github.com/filip26/id32</url>
