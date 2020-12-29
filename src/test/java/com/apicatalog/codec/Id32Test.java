@@ -95,7 +95,9 @@ public class Id32Test {
         Alphabet alphabet = Alphabet.of(Alphabet.DEFAULT.characters);
         
         Assert.assertNotNull(alphabet);
+        Assert.assertArrayEquals(Alphabet.DEFAULT.characters, alphabet.characters());
         Assert.assertArrayEquals(Alphabet.DEFAULT.characters, alphabet.characters);
+        Assert.assertEquals(Alphabet.DEFAULT.characters.length, alphabet.length());
         Assert.assertArrayEquals(Alphabet.DEFAULT.alphas, alphabet.alphas);
         Assert.assertArrayEquals(Alphabet.DEFAULT.numbers, alphabet.numbers);
     }
@@ -116,9 +118,39 @@ public class Id32Test {
         Alphabet alphabet = Alphabet.of(characters);
         
         Assert.assertNotNull(alphabet);
+        Assert.assertArrayEquals(characters, alphabet.characters());
+        Assert.assertEquals(characters.length, alphabet.length());
         Assert.assertArrayEquals(characters, alphabet.characters);
         Assert.assertArrayEquals(IntStream.range(0, 26).toArray(), alphabet.alphas);
         Assert.assertArrayEquals(new int[] {-1, 26, 27, 28, 29, 30, 31, -1, -1, -1}, alphabet.numbers);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidAlphabetOf1() {
+        
+        Alphabet.of(new char[]{
+                'A', 'b', 'C', 'D', 'E', 
+                'F', 'g', 'H', 'I', 'J', 
+                'K', 'l', 'M', 'N', 'O',
+                'P', 'q', 'R', '#', 'T',
+                'U', 'v', 'W', 'X', 'Y',
+                'Z', '1', '2', '3', '4',
+                '5', '6'
+                });
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidAlphabetOf2() {
+        Alphabet.of(new char[]{
+                'A', 'b', 'C', 'D', 'E', 
+                'Z', '1', '2', '3', '4',
+                '5', '6'
+                });
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidAlphabetOf3() {
+        Alphabet.of(null);
     }
 
     static void encodeDecode(Long number) {
