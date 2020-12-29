@@ -44,11 +44,11 @@ public final class Id32 {
 		return String.copyValueOf(chars, MAX_ENCODED_LONG_SIZE - index, index);
 	}
 	
-	public static final Long decodeLong(final String encoded) {
+	public static final long decodeLong(final String encoded) {
 	    return decodeLong(encoded, Alphabet.DEFAULT);
 	}
 	
-   public static final Long decodeLong(final String encoded, final Alphabet alphabet) {
+   public static final long decodeLong(final String encoded, final Alphabet alphabet) {
        if (encoded == null || encoded.length() == 0) {
            throw new IllegalArgumentException("Encoded number must not be a null nor an empty string");
        }
