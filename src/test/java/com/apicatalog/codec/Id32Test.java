@@ -1,9 +1,13 @@
 package com.apicatalog.codec;
 
+import java.util.stream.IntStream;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+
+import com.apicatalog.codec.Id32.Alphabet;
 
 @RunWith(JUnit4.class)
 public class Id32Test {
@@ -87,6 +91,38 @@ public class Id32Test {
     	}
     }
     
+    @Test
+    public void testDefaultAlphabetOf() {
+        
+        Alphabet alphabet = Alphabet.of(Alphabet.DEFAULT.characters);
+        
+        Assert.assertNotNull(alphabet);
+        Assert.assertArrayEquals(Alphabet.DEFAULT.characters, alphabet.characters);
+        Assert.assertArrayEquals(Alphabet.DEFAULT.alphas, alphabet.alphas);
+        Assert.assertArrayEquals(Alphabet.DEFAULT.numbers, alphabet.numbers);
+    }
+
+    @Test
+    public void testCustomAlphabetOf() {
+        
+        char[] characters = new char[]{
+                'A', 'B', 'C', 'D', 'E', 
+                'F', 'G', 'H', 'I', 'J', 
+                'K', 'L', 'M', 'N', 'O',
+                'P', 'Q', 'R', 'S', 'T',
+                'U', 'V', 'W', 'X', 'Y',
+                'Z', '1', '2', '3', '4',
+                '5', '6'
+                };
+
+        Alphabet alphabet = Alphabet.of(characters);
+        
+        Assert.assertNotNull(alphabet);
+        Assert.assertArrayEquals(characters, alphabet.characters);
+        Assert.assertArrayEquals(IntStream.range(0, 26).toArray(), alphabet.alphas);
+        Assert.assertArrayEquals(new int[] {-1, 26, 27, 28, 29, 30, 31, -1, -1, -1}, alphabet.numbers);
+    }
+
     static void encodeDecode(Long number) {
     	
     	final String e1 = Id32.encodeLong(number);
