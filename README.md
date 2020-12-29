@@ -1,9 +1,11 @@
-![Java CI with Maven](https://github.com/filip26/id32/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
 ## Id32 encoder/decoder.
 
 Just another variation on Base32 encoding. Numeric id shortener.
+
+![Java CI with Maven](https://github.com/filip26/id32/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=filip26_id32&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=filip26_id32)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=filip26_id32&metric=coverage)](https://sonarcloud.io/dashboard?id=filip26_id32)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### Goals
 - ``URL`` / ``URI`` / ``IRI`` safe
