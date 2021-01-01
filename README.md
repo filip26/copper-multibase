@@ -1,6 +1,6 @@
-## Id32 encoder/decoder.
+## Numeric Id Encoder/Decoder.
 
-Just another variation on Base32 encoding. Numeric id shortener.
+Just another variation on Base32 encoding.
 
 ![Java CI with Maven](https://github.com/filip26/id32/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=filip26_id32&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=filip26_id32)
