@@ -1,26 +1,57 @@
+/*
+ * Copyright 2020-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.apicatalog.codec;
 
 import java.util.stream.IntStream;
 
+/**
+ * Numeric id encoder/decoder utilizing Base32 algorithm.
+ */
 public final class Id32 {
 
 	private Id32() {}
 
 	public static final int ALPHABET_SIZE = 32;
-	
+
 	public static final int MAX_ENCODED_LONG_SIZE = 13;
-	
-	public static final String encodeLong(final long numericId) {
-	    return encodeLong(numericId, Alphabet.DEFAULT);
+
+	/**
+	 * Encodes {@code long} into {@code String} with the default alphabet.
+	 * 
+	 * @param number to encode
+	 * @return the encoded number 
+	 */
+	public static final String encodeLong(final long number) {
+	    return encodeLong(number, Alphabet.DEFAULT);
 	}
 
-	public static final String encodeLong(final long numericId, final Alphabet alphabet) {
+	/**
+     * Encodes {@code long} into {@code String} with the given alphabet.
+     * 
+     * @param number to encode
+     * @param alphabet to use
+     * @return the encoded number 
+     */
+	public static final String encodeLong(final long number, final Alphabet alphabet) {
 
-		if (numericId < 0) {
-			throw new IllegalArgumentException("An identifier [" + numericId + "] must be equal or greater than zero.");
+		if (number < 0) {
+			throw new IllegalArgumentException("An identifier [" + number + "] must be equal or greater than zero.");
 		}
 		
-		long result = numericId;
+		long result = number;
 		int remainder = 0;
 		
 		char[] chars = new char[MAX_ENCODED_LONG_SIZE];
@@ -43,12 +74,25 @@ public final class Id32 {
 		
 		return String.copyValueOf(chars, MAX_ENCODED_LONG_SIZE - index, index);
 	}
-	
+
+    /**
+     * Decodes {@code long} from {@code String} with the default alphabet.
+     * 
+     * @param encoded number to decode
+     * @return the decoded number
+     */
 	public static final long decodeLong(final String encoded) {
 	    return decodeLong(encoded, Alphabet.DEFAULT);
 	}
 	
-   public static final long decodeLong(final String encoded, final Alphabet alphabet) {
+	/**
+     * Decodes {@code long} from {@code String} with the given alphabet.
+     * 
+     * @param encoded number to decode
+     * @param alphabet to use
+     * @return the decoded number
+     */
+	public static final long decodeLong(final String encoded, final Alphabet alphabet) {
        if (encoded == null || encoded.length() == 0) {
            throw new IllegalArgumentException("Encoded number must not be a null nor an empty string");
        }
