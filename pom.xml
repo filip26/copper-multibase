@@ -16,7 +16,7 @@
 	<inceptionYear>2020</inceptionYear>
 	
   	<description>
-  		Just another numeric id shortener
+  		Just another numeric id encoder/decoder.
     </description>
     
     <url>https://github.com/filip26/id32</url>
