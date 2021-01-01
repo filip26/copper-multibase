@@ -16,14 +16,13 @@ Just another variation on Base32 encoding. Numeric id shortener.
 ### Examples
 ```java
 // default alphabet
-Id32.encodeLong(14348907l)     	: "PLHVM"
-Id32.encodeLong(205891132094649l) 	: "F5E8BHW6F3"
-
+Id32.encodeLong(823543l) : "3R8Z"
+Id32.encodeLong(8922003266371364727l) : "8ZWK1SC2XBJ5Z"
+                
 Id32.decodeLong("JKYZ3YY") : 10000000000l
 Id32.decodeLong("BYYYYY")  : 33554432l
 
 Id32.decodeLong("iphone") == Id32.decodeLong("1PH0NE") : 618545224
-Id32.decodeLong("AU") throws IllegalArgumentException
 
 // custom alphabet
 Id32.encodeLong(123456l, Alphabet.of('X', 'Z', ...));
