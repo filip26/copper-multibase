@@ -55,7 +55,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
          
-        <junit.version>4.13.1</junit.version>
+        <junit.version>4.13.2</junit.version>
 	    
 		<sonar.projectKey>filip26_id32</sonar.projectKey>
         <sonar.organization>apicatalog</sonar.organization>
