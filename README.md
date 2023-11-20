@@ -8,6 +8,7 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 
 ### Features
 - Btc58 encoding [WiP]
+- [Multicodec](https://github.com/filip26/copper-multicodec)
 
 ### Examples
 ```java
