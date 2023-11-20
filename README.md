@@ -7,7 +7,8 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### Features
-- Btc58 encoding [WiP]
+- Base58BTC encoding [WiP]
+- [Multicodec](https://github.com/filip26/copper-multicodec)
 
 ### Examples
 ```java

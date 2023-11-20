@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.apicatalog.codec;
+package com.apicatalog.base;
 
 import java.util.stream.IntStream;
 
@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.apicatalog.codec.Id32.Alphabet;
+import com.apicatalog.base.Id32.Alphabet;
 
 @RunWith(JUnit4.class)
 public class Id32Test {
