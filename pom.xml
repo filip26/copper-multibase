@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.apicatalog</groupId>
     <artifactId>copper-multibase</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Copper Multibase</name>
@@ -93,6 +93,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.6.2</version>
+                <configuration>
+                    <doclint>all,-missing</doclint>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -133,67 +136,67 @@
         </plugins>
     </build>
 
-	<profiles>
-		<profile>
-			<id>maven-central</id>
+    <profiles>
+        <profile>
+            <id>maven-central</id>
 
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
 
-			<build>
-				<plugins>				
-		            <plugin>
-		                <groupId>org.apache.maven.plugins</groupId>
-		                <artifactId>maven-gpg-plugin</artifactId>
-		                <version>3.0.1</version>
-		                <executions>
-		                    <execution>
-		                        <id>sign-artifacts</id>
-		                        <phase>verify</phase>
-		                        <goals>
-		                            <goal>sign</goal>
-		                        </goals>
-		                    </execution>
-		                </executions>
-		            </plugin> 
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.13</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>   				
-				</plugins>
-			</build>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.13</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
 
-		    <distributionManagement>
-		        <snapshotRepository>
-		            <id>ossrh</id>
-		            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		        </snapshotRepository>
-		    </distributionManagement>		
-		</profile>
-		
-		<profile>
-			<id>github-packages</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
 
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
+        <profile>
+            <id>github-packages</id>
 
-		    <distributionManagement>
-			    <repository>
-		            <id>github</id>
-			        <name>GitHub filip26 Apache Maven Packages</name>
-	       <url>https://maven.pkg.github.com/filip26/copper-multibase</url>
-		        </repository>
-		    </distributionManagement>				
-		</profile>
-	</profiles>
- 
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub filip26 Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/filip26/copper-multibase</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
+
 </project>
