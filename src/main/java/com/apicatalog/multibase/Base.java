@@ -13,7 +13,7 @@ public class Base {
     protected final Function<String, byte[]> decode;
     protected final Function<byte[], String> encode;
     
-    protected Base(
+    public Base(
             char prefix,
             int length,
             Function<String, byte[]> decode,

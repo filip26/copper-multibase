@@ -6,14 +6,11 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import com.apicatalog.base.Base58;
+
 public class Multibase {
 
-    public static final Base BASE_58_BTC = new Base('z', 58,
-            encoded -> {
-                return null;
-            }, data -> {
-                return null;
-            });
+    public static final Base BASE_58_BTC = new Base('z', 58, Base58::decode, Base58::encode);
 
     protected final Map<Character, Base> bases;
 
