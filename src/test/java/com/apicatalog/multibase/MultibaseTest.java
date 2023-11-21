@@ -1,4 +1,4 @@
-package com.apicatalog.base;
+package com.apicatalog.multibase;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,27 +9,29 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class Base58Test {
+public class MultibaseTest {
+
+    final MultibaseDecoder DECODER = MultibaseDecoder.getInstance(Multibase.BASE_58_BTC);
 
     @ParameterizedTest(name = "{index}: {0}")
     @MethodSource("testData")
-    void testEncode(String expected, byte[] data) {
-        String output = Base58.encode(data);
+    void testBase58BTCEncode(String expected, byte[] data) {
+        String output = Multibase.BASE_58_BTC.encode(data);
         assertEquals(expected, output);
     }
-
+    
     @ParameterizedTest(name = "{index}: {0}")
     @MethodSource("testData")
     void testDecode(String encoded, byte[] expected) {
-        byte[] output = Base58.decode(encoded);
+        byte[] output = DECODER.decode(encoded);
         assertArrayEquals(expected, output);
     }
 
     static Stream<Arguments> testData() {
         return Stream.of(
-          Arguments.of("2NEpo7TZRRrLZSi2U", "Hello World!".getBytes()),
-          Arguments.of("USm3fpXnKG5EUBx2ndxBDMPVciP5hGey2Jh4NDv6gmeo1LkMeiKrLJUUBk6Z", "The quick brown fox jumps over the lazy dog.".getBytes()),
-          Arguments.of("UXE7GvtEk8XTXs1GF8HSGbVA9FCX9SEBPe", "Decentralize everything!!".getBytes())
+          Arguments.of("zUXE7GvtEk8XTXs1GF8HSGbVA9FCX9SEBPe", "Decentralize everything!!".getBytes()),
+          Arguments.of("zStV1DL6CwTryKyV", "hello world".getBytes()),
+          Arguments.of("z7paNL19xttacUY", "yes mani !".getBytes())
         );
     }
 }
