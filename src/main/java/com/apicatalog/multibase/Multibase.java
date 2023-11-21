@@ -1,5 +1,6 @@
 package com.apicatalog.multibase;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 import com.apicatalog.base.Base58;
@@ -89,5 +90,22 @@ public class Multibase {
         }
 
         return prefix + encode.apply(data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prefix);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Multibase other = (Multibase) obj;
+        return prefix == other.prefix;
     }
 }
