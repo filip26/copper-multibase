@@ -15,168 +15,168 @@
  */
 package com.apicatalog.base;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.stream.IntStream;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import com.apicatalog.base.Id32.Alphabet;
 
-@RunWith(JUnit4.class)
 public class Id32Test {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testNegativeLong() {
-        Id32.encodeLong(-1l);
+        assertThrows(IllegalArgumentException.class, () -> Id32.encodeLong(-1l));
     }
 
     @Test
     public void testOneLetter() {
-    	Assert.assertEquals("N", Id32.encodeLong(2));
-    	Assert.assertEquals("S", Id32.encodeLong(22));
-    	Assert.assertEquals("9", Id32.encodeLong(31));
+        assertEquals("N", Id32.encodeLong(2));
+        assertEquals("S", Id32.encodeLong(22));
+        assertEquals("9", Id32.encodeLong(31));
     }
 
     @Test
     public void testPrime3() {
-    	for (Long value = 3l; value > 0 && value <= Long.MAX_VALUE; value *= 3) {
-    		encodeDecode(value);
-    	}
+        for (Long value = 3l; value > 0 && value <= Long.MAX_VALUE; value *= 3) {
+            encodeDecode(value);
+        }
     }
 
     @Test
     public void testPrime7() {
-    	for (Long value = 7l; value > 0 && value <= Long.MAX_VALUE; value *= 7) {
-    		encodeDecode(value);
-    	}
+        for (Long value = 7l; value > 0 && value <= Long.MAX_VALUE; value *= 7) {
+            encodeDecode(value);
+        }
     }
 
     @Test
     public void testExp10() {
-    	for (Long value = 10l; value > 0 && value <= Long.MAX_VALUE; value *= 10) {
-    		encodeDecode(value);
-    	}
+        for (Long value = 10l; value > 0 && value <= Long.MAX_VALUE; value *= 10) {
+            encodeDecode(value);
+        }
     }
 
     @Test
     public void testExp2() {
-    	for (Long value = 2l; value > 0 && value <= Long.MAX_VALUE; value *= 2) {
-    		encodeDecode(value);
-    	}
+        for (Long value = 2l; value > 0 && value <= Long.MAX_VALUE; value *= 2) {
+            encodeDecode(value);
+        }
     }
-    
+
     @Test
-    public void testLength()  {
-    	Assert.assertEquals(1, Id32.encodeLong(31l).length());
-    	Assert.assertEquals(13, Id32.encodeLong(Long.MAX_VALUE).length());
+    public void testLength() {
+        assertEquals(1, Id32.encodeLong(31l).length());
+        assertEquals(13, Id32.encodeLong(Long.MAX_VALUE).length());
     }
-    
+
     @Test
     public void testMinMax() {
-    	encodeDecode(0l);
-    	encodeDecode(Long.MAX_VALUE);
+        encodeDecode(0l);
+        encodeDecode(Long.MAX_VALUE);
     }
 
     @Test
     public void testAutoCorrection() {
-    	Assert.assertEquals(Id32.decodeLong("1PH0NE"), Id32.decodeLong("iphone"));
+        assertEquals(Id32.decodeLong("1PH0NE"), Id32.decodeLong("iphone"));
     }
-    
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test
     public void testExcludedLettersAU() {
-		Id32.decodeLong("AU");
+        assertThrows(IllegalArgumentException.class, () -> Id32.decodeLong("AU"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testExcludedLettersA() {
-		Id32.decodeLong("A");
+        assertThrows(IllegalArgumentException.class, () -> Id32.decodeLong("A"));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testExcludedLettersU() {
-		Id32.decodeLong("U");
+        assertThrows(IllegalArgumentException.class, () -> Id32.decodeLong("U"));
     }
-    
+
     @Test
     public void testDecodeLowerLetters() {
-        Assert.assertEquals(10000000000l, Id32.decodeLong("jkyz3yy"));
+        assertEquals(10000000000l, Id32.decodeLong("jkyz3yy"));
     }
 
     @Test
     public void testDefaultAlphabetOf() {
-        
+
         Alphabet alphabet = Alphabet.of(Alphabet.DEFAULT.characters);
-        
-        Assert.assertNotNull(alphabet);
-        Assert.assertArrayEquals(Alphabet.DEFAULT.characters, alphabet.characters());
-        Assert.assertArrayEquals(Alphabet.DEFAULT.characters, alphabet.characters);
-        Assert.assertEquals(Alphabet.DEFAULT.characters.length, alphabet.length());
-        Assert.assertArrayEquals(Alphabet.DEFAULT.alphas, alphabet.alphas);
-        Assert.assertArrayEquals(Alphabet.DEFAULT.numbers, alphabet.numbers);
+
+        assertNotNull(alphabet);
+        assertArrayEquals(Alphabet.DEFAULT.characters, alphabet.characters());
+        assertArrayEquals(Alphabet.DEFAULT.characters, alphabet.characters);
+        assertEquals(Alphabet.DEFAULT.characters.length, alphabet.length());
+        assertArrayEquals(Alphabet.DEFAULT.alphas, alphabet.alphas);
+        assertArrayEquals(Alphabet.DEFAULT.numbers, alphabet.numbers);
     }
 
     @Test
     public void testCustomAlphabetOf() {
-        
-        char[] characters = new char[]{
-                'A', 'b', 'C', 'D', 'E', 
-                'F', 'g', 'H', 'I', 'J', 
+
+        char[] characters = new char[] {
+                'A', 'b', 'C', 'D', 'E',
+                'F', 'g', 'H', 'I', 'J',
                 'K', 'l', 'M', 'N', 'O',
                 'P', 'q', 'R', 'S', 'T',
                 'U', 'v', 'W', 'X', 'Y',
                 'Z', '1', '2', '3', '4',
                 '5', '6'
-                };
+        };
 
         Alphabet alphabet = Alphabet.of(characters);
-        
-        Assert.assertNotNull(alphabet);
-        Assert.assertArrayEquals(characters, alphabet.characters());
-        Assert.assertEquals(characters.length, alphabet.length());
-        Assert.assertArrayEquals(characters, alphabet.characters);
-        Assert.assertArrayEquals(IntStream.range(0, 26).toArray(), alphabet.alphas);
-        Assert.assertArrayEquals(new int[] {-1, 26, 27, 28, 29, 30, 31, -1, -1, -1}, alphabet.numbers);
+
+        assertNotNull(alphabet);
+        assertArrayEquals(characters, alphabet.characters());
+        assertEquals(characters.length, alphabet.length());
+        assertArrayEquals(characters, alphabet.characters);
+        assertArrayEquals(IntStream.range(0, 26).toArray(), alphabet.alphas);
+        assertArrayEquals(new int[] { -1, 26, 27, 28, 29, 30, 31, -1, -1, -1 }, alphabet.numbers);
     }
-    
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test
     public void testInvalidAlphabetOf1() {
-        
-        Alphabet.of(new char[]{
-                'A', 'b', 'C', 'D', 'E', 
-                'F', 'g', 'H', 'I', 'J', 
+        assertThrows(IllegalArgumentException.class, () -> Alphabet.of(new char[] {
+                'A', 'b', 'C', 'D', 'E',
+                'F', 'g', 'H', 'I', 'J',
                 'K', 'l', 'M', 'N', 'O',
                 'P', 'q', 'R', '#', 'T',
                 'U', 'v', 'W', 'X', 'Y',
                 'Z', '1', '2', '3', '4',
                 '5', '6'
-                });
+        }));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testInvalidAlphabetOf2() {
-        Alphabet.of(new char[]{
-                'A', 'b', 'C', 'D', 'E', 
+        assertThrows(IllegalArgumentException.class, () -> Alphabet.of(new char[] {
+                'A', 'b', 'C', 'D', 'E',
                 'Z', '1', '2', '3', '4',
                 '5', '6'
-                });
+        }));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testInvalidAlphabetOf3() {
-        Alphabet.of(null);
+        assertThrows(IllegalArgumentException.class, () -> Alphabet.of(null));
     }
 
     static void encodeDecode(Long number) {
-    	
-    	final String e1 = Id32.encodeLong(number);
-    	Assert.assertNotNull(e1);
-    	
-    	System.out.println("encode(" + number + "l) = " + e1 +  "\t ("  + String.format("%.2f", 100*((double)e1.length() / (double)(Long.toString(number).length()))) + "%)");
-    	
-    	final Long d1 = Id32.decodeLong(e1);
-    	Assert.assertNotNull(d1);
-    	Assert.assertEquals(number, d1);
+
+        final String e1 = Id32.encodeLong(number);
+        assertNotNull(e1);
+
+        System.out.println("encode(" + number + "l) = " + e1 + "\t (" + String.format("%.2f", 100 * ((double) e1.length() / (double) (Long.toString(number).length()))) + "%)");
+
+        final Long d1 = Id32.decodeLong(e1);
+        assertNotNull(d1);
+        assertEquals(number, d1);
     }
 }

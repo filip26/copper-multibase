@@ -57,18 +57,22 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <junit.version>4.13.2</junit.version>
-
-        <sonar.projectKey>filip26_id32</sonar.projectKey>
-        <sonar.organization>apicatalog</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <argLine>-Dfile.encoding=UTF-8</argLine>
+        
+        <junit.version>5.10.1</junit.version>
     </properties>
 
     <dependencies>
+        <!--  Tests -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
