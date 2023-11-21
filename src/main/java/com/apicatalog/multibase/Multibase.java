@@ -67,7 +67,7 @@ public class Multibase {
             throw new IllegalArgumentException("Unsupported multibase encoding [" + p + "], this instance process only [" + prefix + "].");
         }
 
-        final String data = encoded.substring(0);
+        final String data = encoded.substring(1);
 
         return decode.apply(data);
     }
