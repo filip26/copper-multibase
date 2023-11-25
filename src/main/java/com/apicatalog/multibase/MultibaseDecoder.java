@@ -14,12 +14,33 @@ public class MultibaseDecoder {
         this.bases = bases;
     }
 
+    /**
+     * A new instance initialized with all supported bases.
+     * 
+     * @return a new instance
+     */
+    public static MultibaseDecoder getInstance() {
+        return getInstance(Multibase.BASE_58_BTC);
+    }
+
+    /**
+     * A new instance initialized with the given bases.
+     * 
+     * @param bases to initialize the decoder
+     * @return a new instance
+     */
     public static MultibaseDecoder getInstance(Multibase... bases) {
         return new MultibaseDecoder(
                 Arrays.stream(bases)
                         .collect(Collectors.toMap(Multibase::prefix, Function.identity())));
     }
 
+    /**
+     * Tries to detect the base used for encoding.
+     * 
+     * @param encoded an encoded value
+     * @return detected base encoding or {@link Optional#empty()}
+     */
     public Optional<Multibase> getBase(final String encoded) {
 
         if (encoded == null) {
