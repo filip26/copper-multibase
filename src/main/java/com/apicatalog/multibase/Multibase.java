@@ -48,6 +48,19 @@ public class Multibase {
     }
 
     /**
+     * Checks if the given value is encoded with the base.
+     * 
+     * @param encoded an encoded value to test
+     * @return <code>true</code> is the given value is encoded with the base,
+     *         <code>false</code> otherwise
+     */
+    public boolean isEncoded(final String encoded) {
+        return encoded != null
+                && encoded.trim().length() > 0
+                && prefix == encoded.charAt(0);
+    }
+
+    /**
      * Decodes the given data into byte array.
      * 
      * @param encoded to decodes
