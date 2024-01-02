@@ -39,6 +39,20 @@ public class Base32Test {
         assertArrayEquals(expected, output);
     }
 
+    @ParameterizedTest(name = "{index}: {0}")
+    @MethodSource("testDataHexUPad")
+    void testEncodeHexUpperPadding(String expected, byte[] data) {
+        String output = Base32.encode(data, Base32.ALPHABET_HEX_UPPER, true);
+        assertEquals(expected, output);
+    }
+
+    @ParameterizedTest(name = "{index}: {0}")
+    @MethodSource("testDataHexUPad")
+    void testDecodeHexUpperPadding(String encoded, byte[] expected) {
+        byte[] output = Base32.decode(encoded, Base32::charToCodeHex, true);
+        assertArrayEquals(expected, output);
+    }
+
     static Stream<Arguments> testDataUPad() {
         return Stream.of(
                 Arguments.of("", "".getBytes()),
@@ -53,10 +67,23 @@ public class Base32Test {
                 Arguments.of(
                         "KRUGS4ZAMRXWG5LNMVXHIIDEMVZWG4TJMJSXGIDUNBSSAY3PNVWW63TMPEQHK43FMQQGEYLTMUQDMNBMEBRGC43FEAZTELBAMFXGIIDCMFZWKIBRGYQGK3TDN5SGS3THEBZWG2DFNVSXGLQKJF2CAYLMONXSAZDJONRXK43TMVZSA5DIMUQHK43FEBXWMIDMNFXGKLLGMVSWI4ZANFXCAZLOMNXWIZLEEBSGC5DBFQQHK43FEBXWMIDQMFSGI2LOM4QGS3RAMVXGG33EMVSCAZDBORQSYIDVONSSA33GEBXG63RNMFWHA2DBMJSXIIDDNBQXEYLDORSXE4ZANFXCAZLOMNXWIZLEEBSGC5DBFQQHK43FEBXWMIDENFTGMZLSMVXHIIDFNZRW6ZDJNZTSAYLMOBUGCYTFORZSYIDBNZSCAY3BNZXW42LDMFWCAZLOMNXWI2LOM5ZS4===",
                         ("This document describes the commonly used base 64, base 32, and base 16 encoding schemes.\n"
-                        + "It also discusses the use of line-feeds in encoded data, use of padding in encoded data, use of non-alphabet characters in encoded data, use of different encoding alphabets, and canonical encodings.")                        
-                        .getBytes()));
+                                + "It also discusses the use of line-feeds in encoded data, use of padding in encoded data, use of non-alphabet characters in encoded data, use of different encoding alphabets, and canonical encodings.")
+                                .getBytes()));
     }
-    
+
+    static Stream<Arguments> testDataHexUPad() {
+        return Stream.of(
+                Arguments.of("", "".getBytes()),
+                Arguments.of("00======", new byte[] { 0 }),
+                Arguments.of("04======", new byte[] { 1 }),                
+                Arguments.of("CO======", "f".getBytes()),
+                Arguments.of("CPNG====", "fo".getBytes()),
+                Arguments.of("CPNMU===", "foo".getBytes()),
+                Arguments.of("CPNMUOG=", "foob".getBytes()),
+                Arguments.of("CPNMUOJ1", "fooba".getBytes()),
+                Arguments.of("CPNMUOJ1E8======", "foobar".getBytes()));
+    }
+
     static Stream<Arguments> testDataU() {
         return Stream.of(
                 Arguments.of("", "".getBytes()),
@@ -71,7 +98,7 @@ public class Base32Test {
                 Arguments.of(
                         "KRUGS4ZAMRXWG5LNMVXHIIDEMVZWG4TJMJSXGIDUNBSSAY3PNVWW63TMPEQHK43FMQQGEYLTMUQDMNBMEBRGC43FEAZTELBAMFXGIIDCMFZWKIBRGYQGK3TDN5SGS3THEBZWG2DFNVSXGLQKJF2CAYLMONXSAZDJONRXK43TMVZSA5DIMUQHK43FEBXWMIDMNFXGKLLGMVSWI4ZANFXCAZLOMNXWIZLEEBSGC5DBFQQHK43FEBXWMIDQMFSGI2LOM4QGS3RAMVXGG33EMVSCAZDBORQSYIDVONSSA33GEBXG63RNMFWHA2DBMJSXIIDDNBQXEYLDORSXE4ZANFXCAZLOMNXWIZLEEBSGC5DBFQQHK43FEBXWMIDENFTGMZLSMVXHIIDFNZRW6ZDJNZTSAYLMOBUGCYTFORZSYIDBNZSCAY3BNZXW42LDMFWCAZLOMNXWI2LOM5ZS4",
                         ("This document describes the commonly used base 64, base 32, and base 16 encoding schemes.\n"
-                        + "It also discusses the use of line-feeds in encoded data, use of padding in encoded data, use of non-alphabet characters in encoded data, use of different encoding alphabets, and canonical encodings.")                        
-                        .getBytes()));
+                                + "It also discusses the use of line-feeds in encoded data, use of padding in encoded data, use of non-alphabet characters in encoded data, use of different encoding alphabets, and canonical encodings.")
+                                .getBytes()));
     }
 }

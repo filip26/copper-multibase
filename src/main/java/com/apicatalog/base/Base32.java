@@ -21,6 +21,20 @@ public class Base32 {
             '3', '4', '5', '6', '7',
     };
 
+    public static char[] ALPHABET_HEX_LOWER = new char[] {
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+            'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+            'u', 'v',
+    };
+
+    public static char[] ALPHABET_HEX_UPPER = new char[] {
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+            'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+            'U', 'V',
+    };
+
     static int[] PADDING = new int[] {
             6, 4, 3, 1, 0,
     };
@@ -201,12 +215,25 @@ public class Base32 {
     public static int charToCode(char ch) {
         if (ch >= 'a' && ch <= 'z') {
             return ch - (int) 'a';
-        }        
+        }
         if (ch >= 'A' && ch <= 'Z') {
             return ch - (int) 'A';
         }
         if (ch >= '2' && ch <= '7') {
             return ch - (int) '2' + 26;
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public static int charToCodeHex(char ch) {
+        if (ch >= 'a' && ch <= 'v') {
+            return ch - (int) 'a' + 10;
+        }
+        if (ch >= 'A' && ch <= 'V') {
+            return ch - (int) 'A' + 10;
+        }
+        if (ch >= '0' && ch <= '9') {
+            return ch - (int) '0';
         }
         throw new IllegalArgumentException();
     }

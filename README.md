@@ -8,6 +8,7 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 
 ### Features
 - Base32 (lower|upper, [no-]padding)
+- Base32Hex (lower|upper, [no-]padding)
 - Base58BTC
 
 ## Contributing
