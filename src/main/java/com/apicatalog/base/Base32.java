@@ -222,7 +222,7 @@ public class Base32 {
         if (ch >= '2' && ch <= '7') {
             return ch - (int) '2' + 26;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Illegal character '" + ch + "'");
     }
 
     public static int charToCodeHex(char ch) {
@@ -235,6 +235,6 @@ public class Base32 {
         if (ch >= '0' && ch <= '9') {
             return ch - (int) '0';
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Illegal character '" + ch + "'");
     }
 }
