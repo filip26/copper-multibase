@@ -20,7 +20,12 @@ public class MultibaseDecoder {
      * @return a new instance
      */
     public static MultibaseDecoder getInstance() {
-        return getInstance(Multibase.BASE_58_BTC);
+        return getInstance(
+                Multibase.BASE_58_BTC,
+                Multibase.BASE_32,
+                Multibase.BASE_32_UPPER,
+                Multibase.BASE_32_PAD,
+                Multibase.BASE_32_PAD_UPPER);
     }
 
     /**

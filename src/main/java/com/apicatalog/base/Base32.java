@@ -1,14 +1,23 @@
 package com.apicatalog.base;
 
+import java.util.function.Function;
+
 /*
  * https://datatracker.ietf.org/doc/html/rfc4648
  */
 public class Base32 {
 
-    static char[] ALPHABET = new char[] {
+    public static char[] ALPHABET_UPPER = new char[] {
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
             'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
             'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2',
+            '3', '4', '5', '6', '7',
+    };
+
+    public static char[] ALPHABET_LOWER = new char[] {
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+            's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '2',
             '3', '4', '5', '6', '7',
     };
 
@@ -17,10 +26,10 @@ public class Base32 {
     };
 
     static int[] PADDING_REVERSE = new int[] {
-            0, 5 - 4, -1, 5 - 3, 5 - 2, -1, 5 - 1, -1,
+            0, 4, -1, 3, 2, -1, 1, -1,
     };
 
-    public static String encode(final byte[] data) {
+    public static String encode(final byte[] data, char[] alphabet, boolean padding) {
         if (data == null) {
             throw new IllegalArgumentException();
         }
@@ -36,48 +45,50 @@ public class Base32 {
 
             switch (index % 5) {
             case 0:
-                encoded.append(ALPHABET[data[index] >>> 3]);
+                encoded.append(alphabet[data[index] >>> 3]);
                 rest = (0x07 & data[index]) << 2;
                 break;
 
             case 1:
-                encoded.append(ALPHABET[rest | (data[index] >>> 6)]);
-                encoded.append(ALPHABET[(0x3f & data[index]) >>> 1]);
+                encoded.append(alphabet[rest | (data[index] >>> 6)]);
+                encoded.append(alphabet[(0x3f & data[index]) >>> 1]);
                 rest = (0x01 & data[index]) << 4;
                 break;
 
             case 2:
-                encoded.append(ALPHABET[rest | (data[index] >>> 4)]);
+                encoded.append(alphabet[rest | (data[index] >>> 4)]);
                 rest = (0x0f & data[index]) << 1;
                 break;
 
             case 3:
-                encoded.append(ALPHABET[rest | (data[index] >>> 7)]);
-                encoded.append(ALPHABET[(0x7f & data[index]) >>> 2]);
+                encoded.append(alphabet[rest | (data[index] >>> 7)]);
+                encoded.append(alphabet[(0x7f & data[index]) >>> 2]);
                 rest = (0x03 & data[index]) << 3;
                 break;
 
             case 4:
-                encoded.append(ALPHABET[rest | (data[index] >>> 5)]);
-                encoded.append(ALPHABET[0x1f & data[index]]);
+                encoded.append(alphabet[rest | (data[index] >>> 5)]);
+                encoded.append(alphabet[0x1f & data[index]]);
                 rest = -1;
                 break;
             }
         }
 
         if (rest != -1) {
-            encoded.append(ALPHABET[rest]);
+            encoded.append(alphabet[rest]);
         }
 
         // pads
-        for (int index = 0; index < (PADDING[(data.length - 1) % 5]); index++) {
-            encoded.append('=');
+        if (padding) {
+            for (int index = 0; index < (PADDING[(data.length - 1) % 5]); index++) {
+                encoded.append('=');
+            }
         }
 
         return encoded.toString();
     }
 
-    public static byte[] decode(final String encoded) {
+    public static byte[] decode(final String encoded, final Function<Character, Integer> charToCode, boolean padding) {
         if (encoded == null) {
             throw new IllegalArgumentException();
         }
@@ -85,18 +96,33 @@ public class Base32 {
             return new byte[0];
         }
 
-        char[] chars = encoded.toCharArray();
+        final char[] chars = encoded.toCharArray();
+
+        final int trailing = chars.length % 8;
+
+        final int pads;
+        final int length;
+
+        if (padding) {
+            if (trailing > 0) {
+                throw new IllegalArgumentException();
+            }
+            pads = getPaddingLength(chars);
+            length = chars.length - pads;
+
+        } else {
+            pads = trailing > 0 ? 8 - trailing : 0;
+            length = chars.length;
+        }
+
+        final byte[] data = new byte[getDecodedLength(length, pads)];
+
         int decoded = 0;
-
-        int padding = getPaddingLength(chars);
-
-        final byte[] data = new byte[getDecodedLength(chars, padding)];
-
         int rest = 0;
 
-        for (int index = 0; index < (chars.length - padding); index++) {
+        for (int index = 0; index < length; index++) {
 
-            int code = charToCode(chars[index]);
+            int code = charToCode.apply(chars[index]);
 
             switch (index % 8) {
             case 0:
@@ -145,9 +171,9 @@ public class Base32 {
         return data;
     }
 
-    static final int getDecodedLength(final char[] data, int pads) {
+    static final int getDecodedLength(final int length, int pads) {
 
-        final int total = (data.length / 8) * 5;
+        final int total = (length / 8) * 5;
 
         final int diff = PADDING_REVERSE[pads];
 
@@ -155,7 +181,7 @@ public class Base32 {
             throw new IllegalArgumentException("Unknown pad size '" + pads + "'");
         }
 
-        return total - diff;
+        return total + diff;
     }
 
     static final int getPaddingLength(final char[] data) {
@@ -164,7 +190,7 @@ public class Base32 {
 
         for (int index = 1; index < 8; index++) {
             if (data[data.length - index] != '=') {
-                break;
+                return pads;
             }
             pads++;
         }
@@ -172,15 +198,16 @@ public class Base32 {
         return pads;
     }
 
-    static int charToCode(char ch) {
-//        System.out.println("CH " + ch);
+    public static int charToCode(char ch) {
+        if (ch >= 'a' && ch <= 'z') {
+            return ch - (int) 'a';
+        }        
         if (ch >= 'A' && ch <= 'Z') {
             return ch - (int) 'A';
         }
         if (ch >= '2' && ch <= '7') {
             return ch - (int) '2' + 26;
         }
-
         throw new IllegalArgumentException();
     }
 }
