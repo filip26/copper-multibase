@@ -9,7 +9,7 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 ### Features
 - `static` registry
   - no lookups when encoding
-  - direct static access to an encoding
+  - direct static access to an encoder
   - confirugable set of encodings to support when decoding
 - Base16 `(lower|upper)`
 - Base32 `(lower|upper, [no-]padding)`
