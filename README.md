@@ -7,6 +7,10 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### Features
+- `static` registry
+  - no lookups when encoding
+  - direct static access to an encoding
+  - confirugable set of encodings to support when decoding
 - Base16 `(lower|upper)`
 - Base32 `(lower|upper, [no-]padding)`
 - Base32Hex `(lower|upper, [no-]padding)`
