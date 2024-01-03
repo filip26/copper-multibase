@@ -7,6 +7,7 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ### Features
+- Base16 (lower|upper)
 - Base32 (lower|upper, [no-]padding)
 - Base32Hex (lower|upper, [no-]padding)
 - Base58BTC

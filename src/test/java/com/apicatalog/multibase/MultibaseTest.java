@@ -50,6 +50,7 @@ public class MultibaseTest {
 
     static Stream<Arguments> testData() {
         return Stream.of(
+                Arguments.of("f666F6F6261", "fooba".getBytes()),
                 Arguments.of("vCPNMUOG", "foob".getBytes()),
                 Arguments.of("bMZXW6YTBOI", "foobar".getBytes()),
                 Arguments.of("BMZXW6YTBOI", "foobar".getBytes()),
