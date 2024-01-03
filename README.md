@@ -18,6 +18,30 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 - Base64URL `([no-]padding)`
 - Base58BTC
 
+## Installation
+
+### Maven
+
+```xml
+<dependency>
+    <groupId>com.apicatalog</groupId>
+    <artifactId>copper-multibase</artifactId>
+    <version>0.4.0</version>
+</dependency>
+```
+
+### Gradle
+
+```gradle
+implementation("com.apicatalog:copper-multibase:0.4.0")
+```
+
+## Documentation
+
+[![javadoc](https://javadoc.io/badge2/com.apicatalog/copper-multibase/javadoc.svg)](https://javadoc.io/doc/com.apicatalog/copper-multibase)
+
+
+
 ## Contributing
 
 All PR's welcome!
