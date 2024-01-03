@@ -1,5 +1,6 @@
 package com.apicatalog.multibase;
 
+import java.util.Base64;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -51,6 +52,26 @@ public class Multibase {
     public static final Multibase BASE_32_PAD_UPPER = new Multibase('C', 32,
             e -> Base32.decode(e, Base32::charToCode, true),
             d -> Base32.encode(d, Base32.ALPHABET_UPPER, true));
+
+    public static final Multibase BASE_64 = new Multibase('m', 64,
+            Base64.getDecoder()::decode,
+            Base64.getEncoder().withoutPadding()::encodeToString
+            );
+
+    public static final Multibase BASE_64_PAD = new Multibase('M', 64,
+            Base64.getMimeDecoder()::decode,
+            Base64.getMimeEncoder()::encodeToString
+            );
+
+    public static final Multibase BASE_64_URL = new Multibase('u', 64,
+            Base64.getUrlDecoder()::decode,
+            Base64.getUrlEncoder().withoutPadding()::encodeToString
+            );
+
+    public static final Multibase BASE_64_URL_PAD = new Multibase('U', 64,
+            Base64.getUrlDecoder()::decode,
+            Base64.getUrlEncoder()::encodeToString
+            );
 
     public static final Multibase BASE_58_BTC = new Multibase('z', 58,
             Base58::decode,

@@ -22,6 +22,10 @@ public class MultibaseDecoder {
     public static MultibaseDecoder getInstance() {
         return getInstance(
                 Multibase.BASE_58_BTC,
+                Multibase.BASE_64,
+                Multibase.BASE_64_PAD,
+                Multibase.BASE_64_URL,
+                Multibase.BASE_64_URL_PAD,
                 Multibase.BASE_32,
                 Multibase.BASE_32_UPPER,
                 Multibase.BASE_32_PAD,
@@ -31,8 +35,7 @@ public class MultibaseDecoder {
                 Multibase.BASE_32_HEX_PAD,
                 Multibase.BASE_32_HEX_PAD_UPPER,
                 Multibase.BASE_16,
-                Multibase.BASE_16_UPPER
-                );
+                Multibase.BASE_16_UPPER);
     }
 
     /**

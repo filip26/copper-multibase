@@ -31,6 +31,14 @@ public class MultibaseTest {
     }
 
     @ParameterizedTest(name = "{index}: {0}")
+    @MethodSource(value = { "test58Data", "testData" })
+    void testEncode(String expected, byte[] data) {
+        Multibase base = DECODER.getBase(expected).orElseThrow(IllegalArgumentException::new);
+        String encoded = base.encode(data);
+        assertEquals(expected, encoded);
+    }
+
+    @ParameterizedTest(name = "{index}: {0}")
     @MethodSource("test58Data")
     void testIsBase58BTCEncoded(String encoded, byte[] data) {
         assertTrue(Multibase.BASE_58_BTC.isEncoded(encoded));
@@ -50,10 +58,19 @@ public class MultibaseTest {
 
     static Stream<Arguments> testData() {
         return Stream.of(
-                Arguments.of("f666F6F6261", "fooba".getBytes()),
-                Arguments.of("vCPNMUOG", "foob".getBytes()),
-                Arguments.of("bMZXW6YTBOI", "foobar".getBytes()),
+                Arguments.of("F666F6F6261", "fooba".getBytes()),
+                Arguments.of("VCPNMUOG", "foob".getBytes()),
+                Arguments.of("bmzxw6ytboi", "foobar".getBytes()),
                 Arguments.of("BMZXW6YTBOI", "foobar".getBytes()),
-                Arguments.of("CMZXW6YTBOI======", "foobar".getBytes()));
+                Arguments.of("CMZXW6YTBOI======", "foobar".getBytes()),
+                Arguments.of("mZg", "f".getBytes()),
+                Arguments.of("MZg==", "f".getBytes()),
+                Arguments.of("mZm8", "fo".getBytes()),
+                Arguments.of("mZm9v", "foo".getBytes()),
+                Arguments.of("mZm9vYg", "foob".getBytes()),
+                Arguments.of("mZm9vYmE", "fooba".getBytes()),
+                Arguments.of("mZm9vYmFy", "foobar".getBytes()),
+                Arguments.of("UZm9vYmE=", "fooba".getBytes())
+                );
     }
 }
