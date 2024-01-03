@@ -151,6 +151,7 @@ public class Base32 {
 
             case 2:
                 data[decoded] = (byte) (rest | code << 1);
+                rest = 0;
                 break;
 
             case 3:
@@ -167,6 +168,7 @@ public class Base32 {
 
             case 5:
                 data[decoded] = (byte) (rest | code << 2);
+                rest = 0;
                 break;
 
             case 6:
@@ -177,9 +179,14 @@ public class Base32 {
 
             case 7:
                 data[decoded] = (byte) (rest | code);
+                rest = 0;
                 decoded++;
                 break;
             }
+        }
+        
+        if (rest > 0) {
+            throw new IllegalArgumentException();
         }
 
         return data;

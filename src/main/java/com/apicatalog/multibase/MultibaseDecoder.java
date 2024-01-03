@@ -10,7 +10,7 @@ public class MultibaseDecoder {
 
     protected final Map<Character, Multibase> bases;
 
-    protected MultibaseDecoder(Map<Character, Multibase> bases) {
+    protected MultibaseDecoder(final Map<Character, Multibase> bases) {
         this.bases = bases;
     }
 
@@ -29,7 +29,9 @@ public class MultibaseDecoder {
                 Multibase.BASE_32_HEX,
                 Multibase.BASE_32_HEX_UPPER,
                 Multibase.BASE_32_HEX_PAD,
-                Multibase.BASE_32_HEX_PAD_UPPER
+                Multibase.BASE_32_HEX_PAD_UPPER,
+                Multibase.BASE_16,
+                Multibase.BASE_16_UPPER
                 );
     }
 
@@ -39,7 +41,7 @@ public class MultibaseDecoder {
      * @param bases to initialize the decoder
      * @return a new instance
      */
-    public static MultibaseDecoder getInstance(Multibase... bases) {
+    public static MultibaseDecoder getInstance(final Multibase... bases) {
         return new MultibaseDecoder(
                 Arrays.stream(bases)
                         .collect(Collectors.toMap(Multibase::prefix, Function.identity())));
@@ -64,7 +66,7 @@ public class MultibaseDecoder {
         return Optional.ofNullable(bases.get(encoded.charAt(0)));
     }
 
-    public byte[] decode(String encoded) {
+    public byte[] decode(final String encoded) {
         return getBase(encoded)
                 .map(base -> base.decode(encoded))
                 .orElseThrow(() -> new IllegalArgumentException("Unsupported multibase encoding [" + encoded.charAt(0) + "]."));
