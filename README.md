@@ -15,7 +15,7 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 - Base32 `(lower|upper, [no-]padding)`
 - Base32Hex `(lower|upper, [no-]padding)`
 - Base64 `([no-]padding)`
-- Base64Url `([no-]padding)`
+- Base64URL `([no-]padding)`
 - Base58BTC
 
 ## Contributing
