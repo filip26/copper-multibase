@@ -3,6 +3,7 @@ package com.apicatalog.multibase;
 import java.util.Objects;
 import java.util.function.Function;
 
+import com.apicatalog.base.Base32;
 import com.apicatalog.base.Base58;
 
 /**
@@ -10,7 +11,41 @@ import com.apicatalog.base.Base58;
  */
 public class Multibase {
 
-    public static final Multibase BASE_58_BTC = new Multibase('z', 58, Base58::decode, Base58::encode);
+    public static final Multibase BASE_32_HEX = new Multibase('v', 58,
+            e -> Base32.decode(e, Base32::charToCodeHex, false),
+            d -> Base32.encode(d, Base32.ALPHABET_HEX_LOWER, false));
+
+    public static final Multibase BASE_32_HEX_UPPER = new Multibase('V', 58,
+            e -> Base32.decode(e, Base32::charToCodeHex, false),
+            d -> Base32.encode(d, Base32.ALPHABET_HEX_UPPER, false));
+
+    public static final Multibase BASE_32_HEX_PAD = new Multibase('t', 58,
+            e -> Base32.decode(e, Base32::charToCodeHex, true),
+            d -> Base32.encode(d, Base32.ALPHABET_LOWER, true));
+
+    public static final Multibase BASE_32_HEX_PAD_UPPER = new Multibase('T', 58,
+            e -> Base32.decode(e, Base32::charToCodeHex, true),
+            d -> Base32.encode(d, Base32.ALPHABET_UPPER, true));
+
+    public static final Multibase BASE_32 = new Multibase('b', 58,
+            e -> Base32.decode(e, Base32::charToCode, false),
+            d -> Base32.encode(d, Base32.ALPHABET_LOWER, false));
+
+    public static final Multibase BASE_32_UPPER = new Multibase('B', 58,
+            e -> Base32.decode(e, Base32::charToCode, false),
+            d -> Base32.encode(d, Base32.ALPHABET_UPPER, false));
+
+    public static final Multibase BASE_32_PAD = new Multibase('c', 58,
+            e -> Base32.decode(e, Base32::charToCode, true),
+            d -> Base32.encode(d, Base32.ALPHABET_LOWER, true));
+
+    public static final Multibase BASE_32_PAD_UPPER = new Multibase('C', 58,
+            e -> Base32.decode(e, Base32::charToCode, true),
+            d -> Base32.encode(d, Base32.ALPHABET_UPPER, true));
+
+    public static final Multibase BASE_58_BTC = new Multibase('z', 58,
+            Base58::decode,
+            Base58::encode);
 
     protected final char prefix;
     protected final int length;
