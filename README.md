@@ -11,6 +11,7 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
   - no lookups when encoding
   - direct static access to an encoder
   - confirugable set of encodings to support when decoding
+- no 3rd pary dependencies
 - Base16 `(lower|upper)`
 - Base32 `(lower|upper, [no-]padding)`
 - Base32Hex `(lower|upper, [no-]padding)`
