@@ -173,7 +173,7 @@ public class Id32Test {
         final String e1 = Id32.encodeLong(number);
         assertNotNull(e1);
 
-        System.out.println("encode(" + number + "l) = " + e1 + "\t (" + String.format("%.2f", 100 * ((double) e1.length() / (double) (Long.toString(number).length()))) + "%)");
+//        System.out.println("encode(" + number + "l) = " + e1 + "\t (" + String.format("%.2f", 100 * ((double) e1.length() / (double) (Long.toString(number).length()))) + "%)");
 
         final Long d1 = Id32.decodeLong(e1);
         assertNotNull(d1);
