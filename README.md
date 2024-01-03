@@ -32,7 +32,7 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
 ```
 
 ### Gradle
-
+Adnrod API level >= 26
 ```gradle
 implementation("com.apicatalog:copper-multibase:0.4.0")
 ```
