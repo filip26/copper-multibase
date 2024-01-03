@@ -43,7 +43,7 @@ public class Base32 {
             0, 4, -1, 3, 2, -1, 1, -1,
     };
 
-    public static String encode(final byte[] data, char[] alphabet, boolean padding) {
+    public static String encode(final byte[] data, final char[] alphabet, final boolean padding) {
         if (data == null) {
             throw new IllegalArgumentException();
         }
