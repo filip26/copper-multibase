@@ -38,7 +38,7 @@ byte[] decoded = decoder.decode(encoded);
 /* or check if base is supported  */
 Multibase base = decoder.getBase(encoded).orElseThrow(() -> new IllegalArgumentException("Unsupported base."));
 /* or get base by prefix */
-Multibase base = decoder.getBase(prefixd).orElseThrow(...);
+Multibase base = decoder.getBase(prefix).orElseThrow(...);
 /* decode */
 byte[] decoded = base.decode(encoded);
 
