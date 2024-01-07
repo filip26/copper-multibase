@@ -32,11 +32,14 @@ var decoder = MultibaseDecoder.getInstance();
 /* get decoder initialized with custom base(s) */
 var decoder = MultibaseDecoder.getInstance(cbases...);
 
-/* decode */
+/* detect multibase and decode */
 byte[] decoded = decoder.decode(encoded);
 
 /* or check if base is supported  */
 Multibase base = decoder.getBase(encoded).orElseThrow(() -> new IllegalArgumentException("Unsupported base."));
+/* or get base by prefix */
+Multibase base = decoder.getBase(prefixd);
+/* decode */
 byte[] decoded = base.decode(encoded);
 
 /* or directy when only one base is supported */
