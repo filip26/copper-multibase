@@ -48,7 +48,7 @@ if (Multibase.BASE_58_BTC.isEncoded(encoded)) {
 }
 
 /* a cutom base implementation */
- var mybase = new Multibase(
+var mybase = new Multibase(
                      prefix,   // multibase prefix letter
                      length,   // bite length
                      string -> byte[], // decode fnc.
