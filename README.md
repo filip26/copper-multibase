@@ -52,10 +52,16 @@ var mybase = new Multibase(
                      prefix,   // multibase prefix letter
                      length,   // bit length
                      string -> byte[], // decode fnc.
-                     byte[] -> string, // encode fnc.
+                     byte[] -> string // encode fnc.
                      );
 
-//* get decoder initialized with a custom base */
+/* encode with a custom base */
+String encoded = mybase.encode(byte[]);
+
+/* directly decode with a custom base */
+byte[] decoded = mybase.decode(encoded);
+
+/* get decoder initialized with a custom base */
 var decoder = MultibaseDecorer.getInstance(mybase, ...);
 ```
 
