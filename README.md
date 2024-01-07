@@ -38,7 +38,7 @@ byte[] decoded = decoder.decode(encoded);
 /* or check if base is supported  */
 Multibase base = decoder.getBase(encoded).orElseThrow(() -> new IllegalArgumentException("Unsupported base."));
 /* or get base by prefix */
-Multibase base = decoder.getBase(prefixd);
+Multibase base = decoder.getBase(prefixd).orElseThrow(...);
 /* decode */
 byte[] decoded = base.decode(encoded);
 
@@ -76,14 +76,14 @@ var decoder = MultibaseDecorer.getInstance(mybase, ...);
 <dependency>
     <groupId>com.apicatalog</groupId>
     <artifactId>copper-multibase</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
 ### Gradle
 Adnrod API level >= 26
 ```gradle
-implementation("com.apicatalog:copper-multibase:0.4.0")
+implementation("com.apicatalog:copper-multibase:0.5.0")
 ```
 
 ## Documentation
