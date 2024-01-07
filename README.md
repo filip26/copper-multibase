@@ -11,8 +11,6 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
   - no lookups when encoding
   - direct static access to an encoder
   - confirugable set of encodings to support when decoding
-- no 3rd pary dependencies
-- easily extendable
 - buil-in bases
   - Base16 `(lower|upper)`
   - Base32 `(lower|upper, [no-]padding)`
@@ -20,6 +18,8 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
   - Base64 `([no-]padding)`
   - Base64URL `([no-]padding)`
   - Base58BTC
+- no 3rd pary dependencies
+- easily extendable
 
 ## Examples
 ```javascript
