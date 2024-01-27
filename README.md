@@ -1,6 +1,6 @@
 # Copper Multibase Encoder and Decoder.
 
-A Java implementation of [Multibase](https://github.com/multiformats/multibase).
+A Java implementation of [Multibase](https://w3c-ccg.github.io/multibase/).
 
 [![Java 8 CI](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml/badge.svg)](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.apicatalog/copper-multibase.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:com.apicatalog%20AND%20a:copper-multibase)
@@ -15,9 +15,9 @@ A Java implementation of [Multibase](https://github.com/multiformats/multibase).
   - Base16 `(lower|upper)`
   - Base32 `(lower|upper, [no-]padding)`
   - Base32Hex `(lower|upper, [no-]padding)`
+  - Base58BTC
   - Base64 `([no-]padding)`
   - Base64URL `([no-]padding)`
-  - Base58BTC
 - no 3rd pary dependencies
 - easily extendable
 
@@ -106,7 +106,8 @@ Fork and clone the project repository.
 
 ## Resources
 - [Copper Multicodec](https://github.com/filip26/copper-multicodec)
-- [Multibase](https://github.com/multiformats/multibase)
+- [W3C CCG Multibase](https://github.com/w3c-ccg/multibase)
+- [Multiformats Multibase](https://github.com/multiformats/multibase)
 - [java-multibase](https://github.com/multiformats/java-multibase)
 
 
