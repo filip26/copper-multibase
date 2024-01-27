@@ -63,7 +63,7 @@ public class MultibaseDecoder {
         }
 
         if (encoded.trim().length() == 0) {
-            throw new IllegalArgumentException("The encoded value be non empty string.");
+            throw new IllegalArgumentException("The encoded value must be non empty string.");
         }
 
         return Optional.ofNullable(bases.get(encoded.charAt(0)));
