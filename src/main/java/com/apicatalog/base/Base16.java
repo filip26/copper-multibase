@@ -7,12 +7,12 @@ public class Base16 {
 
     public static char[] ALPHABET_LOWER = new char[] {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            'a', 'b', 'c', 'd', 'e', 'f', 
+            'a', 'b', 'c', 'd', 'e', 'f',
     };
 
     public static char[] ALPHABET_UPPER = new char[] {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            'A', 'B', 'C', 'D', 'E', 'F', 
+            'A', 'B', 'C', 'D', 'E', 'F',
     };
 
     public static String encode(final byte[] data, final char[] alphabet) {
@@ -23,10 +23,10 @@ public class Base16 {
             return "";
         }
 
-        final StringBuilder encoded = new StringBuilder(data.length *2);
+        final StringBuilder encoded = new StringBuilder(data.length * 2);
 
         for (int index = 0; index < data.length; index++) {
-            encoded.append(alphabet[data[index] >>> 4]);
+            encoded.append(alphabet[0x0f & (data[index] >>> 4)]);
             encoded.append(alphabet[0x0f & data[index]]);
         }
 
@@ -54,7 +54,7 @@ public class Base16 {
             int a = charToCode(chars[index * 2]);
             int b = charToCode(chars[(index * 2) + 1]);
 
-            data[index] = (byte)( a << 4 | b);            
+            data[index] = (byte) (a << 4 | b);
         }
 
         return data;
