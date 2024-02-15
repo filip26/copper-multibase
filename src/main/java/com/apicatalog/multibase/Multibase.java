@@ -104,9 +104,9 @@ public class Multibase {
     }
 
     /**
-     * An encoding length. e.g. 32, 58, 64.
+     * An encoding alphabet length. e.g. 32, 58, 64.
      * 
-     * @return the encoding length
+     * @return the encoding alphabet length
      */
     public int length() {
         return length;

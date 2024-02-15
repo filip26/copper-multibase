@@ -56,32 +56,31 @@ public class Base32 {
         int rest = -1;
 
         for (int index = 0; index < data.length; index++) {
-
             switch (index % 5) {
             case 0:
-                encoded.append(alphabet[data[index] >>> 3]);
+                encoded.append(alphabet[(0x1f & (data[index] >>> 3))]);
                 rest = (0x07 & data[index]) << 2;
                 break;
 
             case 1:
-                encoded.append(alphabet[rest | (data[index] >>> 6)]);
+                encoded.append(alphabet[rest | 0x1f & (data[index] >>> 6)]);
                 encoded.append(alphabet[(0x3f & data[index]) >>> 1]);
                 rest = (0x01 & data[index]) << 4;
                 break;
 
             case 2:
-                encoded.append(alphabet[rest | (data[index] >>> 4)]);
+                encoded.append(alphabet[rest | 0x1f & (data[index] >>> 4)]);
                 rest = (0x0f & data[index]) << 1;
                 break;
 
             case 3:
-                encoded.append(alphabet[rest | (data[index] >>> 7)]);
+                encoded.append(alphabet[rest | 0x1f & (data[index] >>> 7)]);
                 encoded.append(alphabet[(0x7f & data[index]) >>> 2]);
                 rest = (0x03 & data[index]) << 3;
                 break;
 
             case 4:
-                encoded.append(alphabet[rest | (data[index] >>> 5)]);
+                encoded.append(alphabet[rest | 0x1f & (data[index] >>> 5)]);
                 encoded.append(alphabet[0x1f & data[index]]);
                 rest = -1;
                 break;
@@ -184,7 +183,7 @@ public class Base32 {
                 break;
             }
         }
-        
+
         if (rest > 0) {
             throw new IllegalArgumentException();
         }

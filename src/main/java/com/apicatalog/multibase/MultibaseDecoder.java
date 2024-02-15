@@ -66,7 +66,17 @@ public class MultibaseDecoder {
             throw new IllegalArgumentException("The encoded value must be non empty string.");
         }
 
-        return Optional.ofNullable(bases.get(encoded.charAt(0)));
+        return getBase(encoded.charAt(0));
+    }
+    
+    /**
+     * Returns a base associated with the given prefix.
+     * 
+     * @param prefix associated with the base encoding
+     * @return base encoding or {@link Optional#empty()}
+     */
+    public Optional<Multibase> getBase(final char prefix) {
+        return Optional.ofNullable(bases.get(prefix));        
     }
 
     public byte[] decode(final String encoded) {
