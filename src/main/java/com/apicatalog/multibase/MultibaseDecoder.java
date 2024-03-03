@@ -35,7 +35,8 @@ public class MultibaseDecoder {
                 Multibase.BASE_32_HEX_PAD,
                 Multibase.BASE_32_HEX_PAD_UPPER,
                 Multibase.BASE_16,
-                Multibase.BASE_16_UPPER);
+                Multibase.BASE_16_UPPER,
+                Multibase.BASE_2);
     }
 
     /**
