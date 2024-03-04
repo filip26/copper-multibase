@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class Base2Test {
+class Base2Test {
 
     @ParameterizedTest(name = "{index}: {0}")
     @MethodSource("testData")
@@ -32,6 +32,6 @@ public class Base2Test {
                 Arguments.of("00000001", new byte[] { 1 }),
                 Arguments.of("00000101", new byte[] { 5 }),
                 Arguments.of("11111111", new byte[] { (byte) 255 }),
-                Arguments.of("1000000011111110", new byte[] { (byte)128, (byte) 254 }));
+                Arguments.of("1000000011111110", new byte[] { (byte) 128, (byte) 254 }));
     }
 }

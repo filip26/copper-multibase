@@ -12,6 +12,7 @@ A Java implementation of [Multibase](https://w3c-ccg.github.io/multibase/).
   - direct static access to an encoder
   - confirugable set of encodings to support when decoding
 - buil-in bases
+  - Base2
   - Base16 `(lower|upper)`
   - Base32 `(lower|upper, [no-]padding)`
   - Base32Hex `(lower|upper, [no-]padding)`

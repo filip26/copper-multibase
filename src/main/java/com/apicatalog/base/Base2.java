@@ -2,6 +2,9 @@ package com.apicatalog.base;
 
 public class Base2 {
 
+    private Base2() {
+        /* protected */}
+
     public static String encode(final byte[] data) {
         if (data == null) {
             throw new IllegalArgumentException();
