@@ -11,7 +11,7 @@ A Java implementation of [Multibase](https://w3c-ccg.github.io/multibase/).
   - no lookups when encoding
   - direct static access to an encoder
   - configurable set of encodings to support when decoding
-- builr-in bases
+- built-in bases
   - Base2
   - Base16 `(lower|upper)`
   - Base32 `(lower|upper, [no-]padding)`
