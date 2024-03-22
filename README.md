@@ -10,8 +10,8 @@ A Java implementation of [Multibase](https://w3c-ccg.github.io/multibase/).
 - `static` registry
   - no lookups when encoding
   - direct static access to an encoder
-  - confirugable set of encodings to support when decoding
-- buil-in bases
+  - configurable set of encodings to support when decoding
+- builr-in bases
   - Base2
   - Base16 `(lower|upper)`
   - Base32 `(lower|upper, [no-]padding)`
@@ -19,7 +19,7 @@ A Java implementation of [Multibase](https://w3c-ccg.github.io/multibase/).
   - Base58BTC
   - Base64 `([no-]padding)`
   - Base64URL `([no-]padding)`
-- no 3rd pary dependencies
+- no 3rd party dependencies
 - easily extendable
 
 ## Examples
