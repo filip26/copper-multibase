@@ -78,12 +78,6 @@ var decoder = MultibaseDecorer.getInstance(mybase, ...);
 </dependency>
 ```
 
-### Gradle
-Adnrod API level >= 26
-```gradle
-implementation("com.apicatalog:copper-multibase:0.5.0")
-```
-
 ## Documentation
 
 [![javadoc](https://javadoc.io/badge2/com.apicatalog/copper-multibase/javadoc.svg)](https://javadoc.io/doc/com.apicatalog/copper-multibase)
