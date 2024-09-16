@@ -22,7 +22,6 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
-          fingerprint: "BA77CD3CC32D1545F3B1D82CC2EA68A40574B621"
 
       - name: Publish package
         run: mvn -B -Pmaven-central -Dgpg.passphrase=${{secrets.MAVEN_GPG_PASSPHRASE}} -s maven-central-settings.xml deploy
