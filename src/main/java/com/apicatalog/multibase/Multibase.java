@@ -187,4 +187,9 @@ public class Multibase {
         Multibase other = (Multibase) obj;
         return prefix == other.prefix;
     }
+
+    @Override
+    public String toString() {
+        return "Multibase [prefix=" + prefix + ", length=" + length + "]";
+    }
 }
