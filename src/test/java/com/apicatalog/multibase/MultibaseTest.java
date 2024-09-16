@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class MultibaseTest {
 
-    final static MultibaseDecoder DECODER = MultibaseDecoder.getInstance();
+    static final MultibaseDecoder DECODER = MultibaseDecoder.getInstance();
 
     @ParameterizedTest(name = "{index}: {0}")
     @MethodSource("testData")
