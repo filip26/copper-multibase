@@ -14,75 +14,90 @@ import com.apicatalog.base.Base58;
  */
 public class Multibase {
 
-    public static final Multibase BASE_2 = new Multibase('0', 2,
+    public static final Multibase BASE_2 = new Multibase("base2", '0', 2,
             Base2::decode,
             Base2::encode);
 
-    public static final Multibase BASE_16 = new Multibase('f', 16,
+    public static final Multibase BASE_16 = new Multibase("base16", 'f', 16,
             Base16::decode,
             d -> Base16.encode(d, Base16.ALPHABET_LOWER));
 
-    public static final Multibase BASE_16_UPPER = new Multibase('F', 16,
+    public static final Multibase BASE_16_UPPER = new Multibase("base16upper", 'F', 16,
             Base16::decode,
             d -> Base16.encode(d, Base16.ALPHABET_UPPER));
 
-    public static final Multibase BASE_32_HEX = new Multibase('v', 32,
+    public static final Multibase BASE_32_HEX = new Multibase("base32hex", 'v', 32,
             e -> Base32.decode(e, Base32::charToCodeHex, false),
             d -> Base32.encode(d, Base32.ALPHABET_HEX_LOWER, false));
 
-    public static final Multibase BASE_32_HEX_UPPER = new Multibase('V', 32,
+    public static final Multibase BASE_32_HEX_UPPER = new Multibase("base32hexupper", 'V', 32,
             e -> Base32.decode(e, Base32::charToCodeHex, false),
             d -> Base32.encode(d, Base32.ALPHABET_HEX_UPPER, false));
 
-    public static final Multibase BASE_32_HEX_PAD = new Multibase('t', 32,
+    public static final Multibase BASE_32_HEX_PAD = new Multibase("base32hexpad", 't', 32,
             e -> Base32.decode(e, Base32::charToCodeHex, true),
             d -> Base32.encode(d, Base32.ALPHABET_LOWER, true));
 
-    public static final Multibase BASE_32_HEX_PAD_UPPER = new Multibase('T', 32,
+    public static final Multibase BASE_32_HEX_PAD_UPPER = new Multibase("base32hexpadupper", 'T', 32,
             e -> Base32.decode(e, Base32::charToCodeHex, true),
             d -> Base32.encode(d, Base32.ALPHABET_UPPER, true));
 
-    public static final Multibase BASE_32 = new Multibase('b', 32,
+    public static final Multibase BASE_32 = new Multibase("base32", 'b', 32,
             e -> Base32.decode(e, Base32::charToCode, false),
             d -> Base32.encode(d, Base32.ALPHABET_LOWER, false));
 
-    public static final Multibase BASE_32_UPPER = new Multibase('B', 32,
+    public static final Multibase BASE_32_UPPER = new Multibase("base32upper", 'B', 32,
             e -> Base32.decode(e, Base32::charToCode, false),
             d -> Base32.encode(d, Base32.ALPHABET_UPPER, false));
 
-    public static final Multibase BASE_32_PAD = new Multibase('c', 32,
+    public static final Multibase BASE_32_PAD = new Multibase("base32pad", 'c', 32,
             e -> Base32.decode(e, Base32::charToCode, true),
             d -> Base32.encode(d, Base32.ALPHABET_LOWER, true));
 
-    public static final Multibase BASE_32_PAD_UPPER = new Multibase('C', 32,
+    public static final Multibase BASE_32_PAD_UPPER = new Multibase("base32padupper", 'C', 32,
             e -> Base32.decode(e, Base32::charToCode, true),
             d -> Base32.encode(d, Base32.ALPHABET_UPPER, true));
 
-    public static final Multibase BASE_64 = new Multibase('m', 64,
+    public static final Multibase BASE_64 = new Multibase("base64", 'm', 64,
             Base64.getDecoder()::decode,
             Base64.getEncoder().withoutPadding()::encodeToString);
 
-    public static final Multibase BASE_64_PAD = new Multibase('M', 64,
+    public static final Multibase BASE_64_PAD = new Multibase("base32pad", 'M', 64,
             Base64.getMimeDecoder()::decode,
             Base64.getMimeEncoder()::encodeToString);
 
-    public static final Multibase BASE_64_URL = new Multibase('u', 64,
+    public static final Multibase BASE_64_URL = new Multibase("base32url", 'u', 64,
             Base64.getUrlDecoder()::decode,
             Base64.getUrlEncoder().withoutPadding()::encodeToString);
 
-    public static final Multibase BASE_64_URL_PAD = new Multibase('U', 64,
+    public static final Multibase BASE_64_URL_PAD = new Multibase("base32urlpad", 'U', 64,
             Base64.getUrlDecoder()::decode,
             Base64.getUrlEncoder()::encodeToString);
 
-    public static final Multibase BASE_58_BTC = new Multibase('z', 58,
+    public static final Multibase BASE_58_BTC = new Multibase("base58btc", 'z', 58,
             Base58::decode,
             Base58::encode);
 
+    protected final String name;
+    
     protected final char prefix;
     protected final int length;
 
     protected final Function<String, byte[]> decode;
     protected final Function<byte[], String> encode;
+
+    public Multibase(
+            String name,
+            char prefix,
+            int length,
+            Function<String, byte[]> decode,
+            Function<byte[], String> encode) {
+        this.prefix = prefix;
+        this.length = length;
+        this.decode = decode;
+        this.encode = encode;
+        this.name = name;
+    }
 
     public Multibase(
             char prefix,
@@ -93,8 +108,17 @@ public class Multibase {
         this.length = length;
         this.decode = decode;
         this.encode = encode;
+        this.name = "" + prefix;
     }
 
+    /**
+     * A unique codec name, all lower case, only <code>ALPHA+ALPHANUM*</code>
+     * @return
+     */
+    public String name() {
+        return name;
+    }
+    
     /**
      * A unique prefix identifying base encoding in encoded value.
      * 
