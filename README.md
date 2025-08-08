@@ -74,7 +74,7 @@ var decoder = MultibaseDecorer.getInstance(mybase, ...);
 <dependency>
     <groupId>com.apicatalog</groupId>
     <artifactId>copper-multibase</artifactId>
-    <version>1.2.0</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 
