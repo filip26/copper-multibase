@@ -2,50 +2,69 @@ package com.apicatalog.base;
 
 import java.util.function.Function;
 
-/*
- * https://datatracker.ietf.org/doc/html/rfc4648
+/**
+ * Base32 encoder and decoder based on RFC 4648.
+ * <p>
+ * Supports both standard Base32 and Base32hex variants, with optional padding.
+ * </p>
+ *
+ * @see <a href="https://datatracker.ietf.org/doc/html/rfc4648">RFC 4648</a>
  */
 public class Base32 {
 
-    public static char[] ALPHABET_UPPER = new char[] {
+    /** RFC 4648 standard Base32 alphabet (uppercase). */
+    public static final char[] ALPHABET_UPPER = new char[] {
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
             'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
             'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2',
             '3', '4', '5', '6', '7',
     };
 
-    public static char[] ALPHABET_LOWER = new char[] {
+    /** RFC 4648 standard Base32 alphabet (lowercase). */
+    public static final char[] ALPHABET_LOWER = new char[] {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
             'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
             's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '2',
             '3', '4', '5', '6', '7',
     };
 
-    public static char[] ALPHABET_HEX_LOWER = new char[] {
+    /** RFC 4648 Base32hex alphabet (lowercase). */
+    public static final char[] ALPHABET_HEX_LOWER = new char[] {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
             'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
             'u', 'v',
     };
 
-    public static char[] ALPHABET_HEX_UPPER = new char[] {
+    /** RFC 4648 Base32hex alphabet (uppercase). */
+    public static final char[] ALPHABET_HEX_UPPER = new char[] {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
             'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
             'U', 'V',
     };
 
-    static int[] PADDING = new int[] {
+    static final int[] PADDING = new int[] {
             6, 4, 3, 1, 0,
     };
 
-    static int[] PADDING_REVERSE = new int[] {
+    static final int[] PADDING_REVERSE = new int[] {
             0, 4, -1, 3, 2, -1, 1, -1,
     };
 
+    /**
+     * Encodes the given byte array into a Base32 string using the specified
+     * alphabet.
+     *
+     * @param data     the data to encode
+     * @param alphabet the encoding alphabet (must be 32 characters)
+     * @param padding  whether to include padding characters ('=') in the output
+     * @return the encoded string
+     * @throws IllegalArgumentException if {@code data} is null
+     */
     public static String encode(final byte[] data, final char[] alphabet, final boolean padding) {
         if (data == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Input data must not be null.");
         }
         if (data.length == 0) {
             return "";
@@ -101,9 +120,19 @@ public class Base32 {
         return encoded.toString();
     }
 
+    /**
+     * Decodes a Base32 string into a byte array.
+     *
+     * @param encoded    the encoded string
+     * @param charToCode a function that maps each character to its 5-bit code
+     * @param padding    whether padding is expected in the input
+     * @return the decoded byte array
+     * @throws IllegalArgumentException if the input is null, malformed, or contains
+     *                                  invalid characters
+     */
     public static byte[] decode(final String encoded, final Function<Character, Integer> charToCode, boolean padding) {
         if (encoded == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Encoded string must not be null.");
         }
         if (encoded.isEmpty()) {
             return new byte[0];
@@ -118,7 +147,7 @@ public class Base32 {
 
         if (padding) {
             if (trailing > 0) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Invalid padding: base32 string must be a multiple of 8 characters.");
             }
             pads = getPaddingLength(chars);
             length = chars.length - pads;
@@ -185,7 +214,7 @@ public class Base32 {
         }
 
         if (rest > 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Invalid base32 string: leftover bits after decoding.");
         }
 
         return data;
@@ -198,7 +227,7 @@ public class Base32 {
         final int diff = PADDING_REVERSE[pads];
 
         if (diff == -1) {
-            throw new IllegalArgumentException("Unknown pad size '" + pads + "'");
+            throw new IllegalArgumentException("Invalid number of padding characters: " + pads);
         }
 
         return total + diff;
@@ -218,6 +247,14 @@ public class Base32 {
         return pads;
     }
 
+    /**
+     * Converts a Base32 character to its 5-bit code. Accepts both upper and
+     * lowercase letters and digits '2' to '7'.
+     *
+     * @param ch the Base32 character
+     * @return the 5-bit value
+     * @throws IllegalArgumentException if the character is invalid
+     */
     public static int charToCode(char ch) {
         if (ch >= 'a' && ch <= 'z') {
             return ch - (int) 'a';
@@ -228,9 +265,17 @@ public class Base32 {
         if (ch >= '2' && ch <= '7') {
             return ch - (int) '2' + 26;
         }
-        throw new IllegalArgumentException("Illegal character '" + ch + "'");
+        throw new IllegalArgumentException("Invalid base32 character: '" + ch + "'");
     }
 
+    /**
+     * Converts a Base32hex character to its 5-bit code. Accepts lowercase letters
+     * 'a' to 'v', uppercase 'A' to 'V', and digits '0' to '9'.
+     *
+     * @param ch the Base32hex character
+     * @return the 5-bit value
+     * @throws IllegalArgumentException if the character is invalid
+     */
     public static int charToCodeHex(char ch) {
         if (ch >= 'a' && ch <= 'v') {
             return ch - (int) 'a' + 10;
@@ -241,6 +286,6 @@ public class Base32 {
         if (ch >= '0' && ch <= '9') {
             return ch - (int) '0';
         }
-        throw new IllegalArgumentException("Illegal character '" + ch + "'");
+        throw new IllegalArgumentException("Invalid base32hex character: '" + ch + "'");
     }
 }
