@@ -62,15 +62,15 @@ public class Multibase {
             Base64.getDecoder()::decode,
             Base64.getEncoder().withoutPadding()::encodeToString);
 
-    public static final Multibase BASE_64_PAD = new Multibase("base32pad", 'M', 64,
+    public static final Multibase BASE_64_PAD = new Multibase("base64pad", 'M', 64,
             Base64.getMimeDecoder()::decode,
             Base64.getMimeEncoder()::encodeToString);
 
-    public static final Multibase BASE_64_URL = new Multibase("base32url", 'u', 64,
+    public static final Multibase BASE_64_URL = new Multibase("base64url", 'u', 64,
             Base64.getUrlDecoder()::decode,
             Base64.getUrlEncoder().withoutPadding()::encodeToString);
 
-    public static final Multibase BASE_64_URL_PAD = new Multibase("base32urlpad", 'U', 64,
+    public static final Multibase BASE_64_URL_PAD = new Multibase("base64urlpad", 'U', 64,
             Base64.getUrlDecoder()::decode,
             Base64.getUrlEncoder()::encodeToString);
 
