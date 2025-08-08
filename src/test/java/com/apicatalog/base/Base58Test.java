@@ -27,9 +27,8 @@ public class Base58Test {
 
     static Stream<Arguments> testData() {
         return Stream.of(
-          Arguments.of("2NEpo7TZRRrLZSi2U", "Hello World!".getBytes()),
-          Arguments.of("USm3fpXnKG5EUBx2ndxBDMPVciP5hGey2Jh4NDv6gmeo1LkMeiKrLJUUBk6Z", "The quick brown fox jumps over the lazy dog.".getBytes()),
-          Arguments.of("UXE7GvtEk8XTXs1GF8HSGbVA9FCX9SEBPe", "Decentralize everything!!".getBytes())
-        );
+                Arguments.of("2NEpo7TZRRrLZSi2U", "Hello World!".getBytes()),
+                Arguments.of("USm3fpXnKG5EUBx2ndxBDMPVciP5hGey2Jh4NDv6gmeo1LkMeiKrLJUUBk6Z", "The quick brown fox jumps over the lazy dog.".getBytes()),
+                Arguments.of("UXE7GvtEk8XTXs1GF8HSGbVA9FCX9SEBPe", "Decentralize everything!!".getBytes()));
     }
 }
