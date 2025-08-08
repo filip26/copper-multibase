@@ -10,7 +10,26 @@ import com.apicatalog.base.Base32;
 import com.apicatalog.base.Base58;
 
 /**
- * Represents multibase encoding.
+ * Represents a multibase encoding format.
+ * <p>
+ * Multibase is a convention for identifying which base encoding has been used
+ * to encode binary data by prefixing the encoded string with a unique
+ * character. This allows for consistent and unambiguous decoding across
+ * different base encodings, such as Base16, Base32, Base58, and Base64
+ * variants.
+ * </p>
+ * <p>
+ * Each {@code Multibase} instance includes:
+ * <ul>
+ * <li>A unique base name (e.g., {@code base64url})</li>
+ * <li>A single-character prefix used to identify the base in encoded data</li>
+ * <li>The alphabet size (e.g., 32, 58, 64)</li>
+ * <li>Functions for encoding and decoding</li>
+ * </ul>
+ * </p>
+ *
+ * @see <a href="https://github.com/multiformats/multibase">Multibase
+ *      specification</a>
  */
 public class Multibase {
 
@@ -94,17 +113,26 @@ public class Multibase {
             Multibase.BASE_32_HEX_PAD_UPPER,
             Multibase.BASE_16,
             Multibase.BASE_16_UPPER,
-            Multibase.BASE_2            
+            Multibase.BASE_2
     };
-        
+
     protected final String name;
-    
+
     protected final char prefix;
     protected final int length;
 
     protected final Function<String, byte[]> decode;
     protected final Function<byte[], String> encode;
 
+    /**
+     * Constructs a {@code Multibase} instance.
+     *
+     * @param name   the unique base name (e.g., "base64urlpad")
+     * @param prefix the unique prefix character indicating the base
+     * @param length the base alphabet length
+     * @param decode the decoding function
+     * @param encode the encoding function
+     */
     public Multibase(
             String name,
             char prefix,
@@ -118,6 +146,7 @@ public class Multibase {
         this.name = name;
     }
 
+    @Deprecated
     public Multibase(
             char prefix,
             int length,
@@ -131,37 +160,39 @@ public class Multibase {
     }
 
     /**
-     * A unique codec name, all lower case, only <code>ALPHA+ALPHANUM*</code>
-     * @return
+     * Returns the unique base name of this multibase (e.g., {@code base64url}).
+     *
+     * @return the multibase name
      */
     public String name() {
         return name;
     }
-    
+
     /**
-     * A unique prefix identifying base encoding in encoded value.
-     * 
-     * @return the base encoding unique prefix
+     * Returns the unique prefix character used to identify this multibase in
+     * encoded strings.
+     *
+     * @return the multibase prefix character
      */
     public char prefix() {
         return prefix;
     }
 
     /**
-     * An encoding alphabet length. e.g. 32, 58, 64.
-     * 
-     * @return the encoding alphabet length
+     * Returns the length of the base alphabet (e.g., 32, 58, 64).
+     *
+     * @return the length of the encoding alphabet
      */
     public int length() {
         return length;
     }
 
     /**
-     * Checks if the given value is encoded with the base.
-     * 
-     * @param encoded an encoded value to test
-     * @return <code>true</code> is the given value is encoded with the base,
-     *         <code>false</code> otherwise
+     * Checks whether the given string is encoded with this multibase.
+     *
+     * @param encoded the string to test
+     * @return {@code true} if the string is encoded using this multibase,
+     *         {@code false} otherwise
      */
     public boolean isEncoded(final String encoded) {
         return encoded != null
@@ -170,10 +201,12 @@ public class Multibase {
     }
 
     /**
-     * Decodes the given data into byte array.
-     * 
-     * @param encoded to decodes
-     * @return encoded data as byte array
+     * Decodes the given multibase-encoded string into a byte array.
+     *
+     * @param encoded the multibase-encoded string
+     * @return the decoded byte array
+     * @throws IllegalArgumentException if the input is {@code null}, empty, or has
+     *                                  an incorrect prefix
      */
     public byte[] decode(final String encoded) {
         if (encoded == null) {
@@ -196,10 +229,11 @@ public class Multibase {
     }
 
     /**
-     * Encodes the given data into base encoded string.
-     * 
-     * @param data to encode
-     * @return a string representing the encoded data
+     * Encodes the given byte array into a multibase-encoded string.
+     *
+     * @param data the byte array to encode
+     * @return the encoded string, including the base prefix
+     * @throws IllegalArgumentException if the input is {@code null} or empty
      */
     public String encode(byte[] data) {
 
@@ -231,11 +265,21 @@ public class Multibase {
         return prefix == other.prefix;
     }
 
+    /**
+     * Returns a string representation of this {@code Multibase}.
+     *
+     * @return a string containing the prefix and base length
+     */
     @Override
     public String toString() {
         return "Multibase [prefix=" + prefix + ", length=" + length + "]";
     }
-    
+
+    /**
+     * Returns a list of all provided {@code Multibase} instances.
+     *
+     * @return an array of supported multibase instances
+     */
     public static Multibase[] provided() {
         return ALL;
     }
