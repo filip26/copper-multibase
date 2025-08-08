@@ -20,13 +20,13 @@ import com.apicatalog.base.Base58;
  * </p>
  * <p>
  * Each {@code Multibase} instance includes:
+ * </p>
  * <ul>
  * <li>A unique base name (e.g., {@code base64url})</li>
  * <li>A single-character prefix used to identify the base in encoded data</li>
  * <li>The alphabet size (e.g., 32, 58, 64)</li>
  * <li>Functions for encoding and decoding</li>
  * </ul>
- * </p>
  *
  * @see <a href="https://github.com/multiformats/multibase">Multibase
  *      specification</a>
