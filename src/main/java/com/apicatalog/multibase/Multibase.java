@@ -78,6 +78,25 @@ public class Multibase {
             Base58::decode,
             Base58::encode);
 
+    protected static final Multibase[] ALL = new Multibase[] {
+            Multibase.BASE_58_BTC,
+            Multibase.BASE_64,
+            Multibase.BASE_64_PAD,
+            Multibase.BASE_64_URL,
+            Multibase.BASE_64_URL_PAD,
+            Multibase.BASE_32,
+            Multibase.BASE_32_UPPER,
+            Multibase.BASE_32_PAD,
+            Multibase.BASE_32_PAD_UPPER,
+            Multibase.BASE_32_HEX,
+            Multibase.BASE_32_HEX_UPPER,
+            Multibase.BASE_32_HEX_PAD,
+            Multibase.BASE_32_HEX_PAD_UPPER,
+            Multibase.BASE_16,
+            Multibase.BASE_16_UPPER,
+            Multibase.BASE_2            
+    };
+        
     protected final String name;
     
     protected final char prefix;
@@ -215,5 +234,9 @@ public class Multibase {
     @Override
     public String toString() {
         return "Multibase [prefix=" + prefix + ", length=" + length + "]";
+    }
+    
+    public static Multibase[] provided() {
+        return ALL;
     }
 }
