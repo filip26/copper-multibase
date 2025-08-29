@@ -3,6 +3,7 @@
 A Java implementation of [Multibase](https://w3c-ccg.github.io/multibase/).
 
 [![Java 8 CI](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml/badge.svg)](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml)
+[![javadoc](https://javadoc.io/badge2/com.apicatalog/copper-multibase/javadoc.svg)](https://javadoc.io/doc/com.apicatalog/copper-multibase)
 [![Maven Central](https://img.shields.io/maven-central/v/com.apicatalog/copper-multibase.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:com.apicatalog%20AND%20a:copper-multibase)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -74,15 +75,9 @@ var decoder = MultibaseDecorer.getInstance(mybase, ...);
 <dependency>
     <groupId>com.apicatalog</groupId>
     <artifactId>copper-multibase</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
 </dependency>
 ```
-
-## Documentation
-
-[![javadoc](https://javadoc.io/badge2/com.apicatalog/copper-multibase/javadoc.svg)](https://javadoc.io/doc/com.apicatalog/copper-multibase)
-
-
 
 ## Contributing
 
