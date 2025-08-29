@@ -1,4 +1,4 @@
-# Copper Multibase Encoder and Decoder
+# Copper Multibase
 
 Multibase is a **self-describing** format for representing binary data as text. Each multibase-encoded string begins with a single character that uniquely identifies the base encoding (e.g., `z` for Base58BTC, `m` for Base64).  
 
