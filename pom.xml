@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.apicatalog</groupId>
     <artifactId>copper-multibase</artifactId>
-    <version>4.1.0</version>
+    <version>4.1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Copper Multibase</name>
@@ -15,7 +15,7 @@
     <inceptionYear>2020</inceptionYear>
 
     <description>
-        An implementation of multibase encoder/decoder.
+        Self-describing base encodings - Multibase encoder/decoder.
     </description>
 
     <url>https://github.com/filip26/copper-multibase</url>
