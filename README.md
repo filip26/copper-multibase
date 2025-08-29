@@ -1,6 +1,6 @@
 # Copper Multibase Encoder and Decoder.
 
-A Java implementation of [Multibase](https://w3c-ccg.github.io/multibase/).
+Multibase is a **self-describing format** for encoding binary data as text. A multibase-encoded string is prefixed with a single character that uniquely identifies the base encoding (e.g., `z` for Base58-BTC, `m` for Base64). This allows encoded data to carry along the information needed for correct decoding.
 
 [![Java 8 CI](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml/badge.svg)](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml)
 [![javadoc](https://javadoc.io/badge2/com.apicatalog/copper-multibase/javadoc.svg)](https://javadoc.io/doc/com.apicatalog/copper-multibase)
