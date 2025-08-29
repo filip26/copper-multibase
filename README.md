@@ -32,14 +32,15 @@ String encoded = Multibase.BASE_58_BTC.encode(byte[]);
 var decoder = MultibaseDecoder.getInstance();
 
 /* get decoder initialized with custom base(s) */
-var decoder = MultibaseDecoder.getInstance(cbases...);
+var decoder = MultibaseDecoder.getInstance(mybase, ...);
 
 /* decode */
 byte[] decoded = decoder.decode(encoded);
 
 /* or check if base is supported  */
-Multibase base = decoder.getBase(encoded).orElseThrow(() -> new IllegalArgumentException("Unsupported base."));
-byte[] decoded = base.decode(encoded);
+byte[] decoded = decoder.getBase(encoded)
+                        .map(base -> base.decode(encoded))
+                        .orElseThrow(() -> new IllegalArgumentException("Unsupported base."));
 
 /* or directy when only one base is supported */
 byte[] decoded = Multibase.BASE_58_BTC.decode(encoded);
@@ -51,10 +52,11 @@ if (Multibase.BASE_58_BTC.isEncoded(encoded)) {
 
 /* a cutom base implementation */
 var mybase = new Multibase(
-                     prefix,   // multibase prefix letter
-                     length,   // alphabet length
-                     string -> byte[], // decode fnc.
-                     byte[] -> string // encode fnc.
+                     name,     // the unique base name (e.g., "base64urlpad")
+                     prefix,   // the unique prefix character indicating the base
+                     length,   // the base alphabet length
+                     string -> byte[], // the decoding function
+                     byte[] -> string  // the encoding function
                      );
 
 /* encode with a custom base */
@@ -63,8 +65,6 @@ String encoded = mybase.encode(byte[]);
 /* directly decode with a custom base */
 byte[] decoded = mybase.decode(encoded);
 
-/* get decoder initialized with a custom base */
-var decoder = MultibaseDecorer.getInstance(mybase, ...);
 ```
 
 ## Installation
