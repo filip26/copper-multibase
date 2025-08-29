@@ -98,4 +98,32 @@ public class MultibaseDecoder {
                 .map(base -> base.decode(encoded))
                 .orElseThrow(() -> new IllegalArgumentException("Unsupported multibase encoding [" + encoded.charAt(0) + "]."));
     }
+
+    /**
+     * Returns an unmodifiable view of the registered multibase encodings.
+     *
+     * <p>
+     * The returned map associates each multibase prefix character with its
+     * corresponding {@link Multibase} instance. Attempts to modify the map (e.g.
+     * {@code put}, {@code remove}) will result in an
+     * {@link UnsupportedOperationException}.
+     * </p>
+     *
+     * @return an unmodifiable map of prefix characters to {@link Multibase}
+     *         instances
+     */
+    public Map<Character, Multibase> bases() {
+        return bases;
+    }
+
+    /**
+     * Returns the number of multibase encodings currently registered with this
+     * decoder.
+     *
+     * @return the count of registered encodings
+     */
+    public long size() {
+        return bases.size();
+    }
+
 }
