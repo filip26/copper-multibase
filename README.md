@@ -81,6 +81,27 @@ byte[] decoded = mybase.decode(encoded);
 </dependency>
 ```
 
+## ld-cli
+
+[ld-cli](https://github.com/filip26/ld-cli) is a command-line utility for
+working with multiformats including multibase, multicodec, and multihash,
+as well as JSON-LD and related specifications.
+
+It provides encoding, decoding, detection, analysis, and format conversion
+features, making it useful for inspecting identifiers, testing content
+addressing, and integrating multiformats into development workflows.
+
+### Example
+
+Detect and analyze a multibase + multicodec value
+```bash
+> ld-cli multicodec --analyze --multibase <<< 'z6MkmM42vxfqZQsv4ehtTjFFxQ4sQKS2w6WR7emozFAn5cxu'
+
+Multibase:  name=base58btc, prefix=z, length=58 chars
+Multicodec: name=ed25519-pub, code=237, varint=[0xED,0x01], tag=Key, status=Draft
+Length:     32 bytes
+```
+
 ## Contributing
 
 All PR's welcome!
@@ -103,3 +124,7 @@ Fork and clone the project repository.
 - [java-multibase](https://github.com/multiformats/java-multibase)
 
 
+## Commercial Support
+
+Commercial support and consulting are available.  
+For inquiries, please contact: filip26@gmail.com
