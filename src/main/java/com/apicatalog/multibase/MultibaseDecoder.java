@@ -86,6 +86,26 @@ public class MultibaseDecoder {
     }
 
     /**
+     * Finds a registered {@link Multibase} encoding by its name.
+     *
+     * <p>
+     * This method searches through all multibases registered with this decoder and
+     * returns the first whose {@link Multibase#name()} matches the given name
+     * exactly.
+     * </p>
+     *
+     * @param name the name of the multibase encoding (must not be {@code null})
+     * @return an {@code Optional} containing the matching {@link Multibase}, or an
+     *         empty {@code Optional} if no encoding with the given name is found
+     * @throws NullPointerException if {@code name} is {@code null}
+     */
+    public final Optional<Multibase> findBase(final String name) {
+        return bases.values().stream()
+                .filter(base -> base.name().equals(name))
+                .findFirst();
+    }
+
+    /**
      * Decodes a multibase-encoded string into a byte array.
      *
      * @param encoded the encoded string to decode
@@ -98,4 +118,32 @@ public class MultibaseDecoder {
                 .map(base -> base.decode(encoded))
                 .orElseThrow(() -> new IllegalArgumentException("Unsupported multibase encoding [" + encoded.charAt(0) + "]."));
     }
+
+    /**
+     * Returns an unmodifiable view of the registered multibase encodings.
+     *
+     * <p>
+     * The returned map associates each multibase prefix character with its
+     * corresponding {@link Multibase} instance. Attempts to modify the map (e.g.
+     * {@code put}, {@code remove}) will result in an
+     * {@link UnsupportedOperationException}.
+     * </p>
+     *
+     * @return an unmodifiable map of prefix characters to {@link Multibase}
+     *         instances
+     */
+    public Map<Character, Multibase> bases() {
+        return bases;
+    }
+
+    /**
+     * Returns the number of multibase encodings currently registered with this
+     * decoder.
+     *
+     * @return the count of registered encodings
+     */
+    public long size() {
+        return bases.size();
+    }
+
 }
