@@ -12,7 +12,7 @@ import com.apicatalog.base.Base58;
 /**
  * Represents a multibase encoding format.
  * <p>
- * Multibase is a convention for identifying which base encoding has been used
+ * Multibase is a self-describing format for identifying which base encoding has been used
  * to encode binary data by prefixing the encoded string with a unique
  * character. This allows for consistent and unambiguous decoding across
  * different base encodings, such as Base16, Base32, Base58, and Base64
