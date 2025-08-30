@@ -9,7 +9,7 @@ This design allows encoded data to carry the information needed for correct deco
 [![Maven Central](https://img.shields.io/maven-central/v/com.apicatalog/copper-multibase.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:com.apicatalog%20AND%20a:copper-multibase)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-## Features
+## ✨ Features
 - `static` registry
   - no lookups when encoding
   - direct static access to an encoder
@@ -81,9 +81,9 @@ byte[] decoded = mybase.decode(encoded);
 </dependency>
 ```
 
-## ld-cli
+## LD-CLI
 
-[ld-cli](https://github.com/filip26/ld-cli) is a command-line utility for
+[LD-CLI](https://github.com/filip26/ld-cli) is a command-line utility for
 working with multiformats including multibase, multicodec, and multihash,
 as well as JSON-LD and related specifications.
 
