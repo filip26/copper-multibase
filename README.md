@@ -81,7 +81,7 @@ byte[] decoded = mybase.decode(encoded);
 </dependency>
 ```
 
-## LD-CLI
+## 🛠️ LD-CLI
 
 [LD-CLI](https://github.com/filip26/ld-cli) is a command-line utility for
 working with multiformats including multibase, multicodec, and multihash,
