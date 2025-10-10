@@ -4,7 +4,7 @@ Multibase is a **self-describing** format for representing binary data as text. 
 
 This design allows encoded data to carry the information needed for correct decoding, ensuring clarity, interoperability, and extensibility across systems.
 
-[![Java 8 CI](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml/badge.svg)](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml)
+[![Java 8 CI](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml/badge.svg?branch=main)](https://github.com/filip26/copper-multibase/actions/workflows/java8-build.yml)
 [![javadoc](https://javadoc.io/badge2/com.apicatalog/copper-multibase/javadoc.svg)](https://javadoc.io/doc/com.apicatalog/copper-multibase)
 [![Maven Central](https://img.shields.io/maven-central/v/com.apicatalog/copper-multibase.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:com.apicatalog%20AND%20a:copper-multibase)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -25,7 +25,7 @@ This design allows encoded data to carry the information needed for correct deco
 - no 3rd party dependencies
 - easily extendable
 
-## Examples
+## 💡 Examples
 ```javascript
 /* encode an input with Base58BTC */
 String encoded = Multibase.BASE_58_BTC.encode(byte[]);
@@ -69,9 +69,11 @@ byte[] decoded = mybase.decode(encoded);
 
 ```
 
-## Installation
+## 📦 Installation
 
 ### Maven
+
+To include Copper Multibase in your project, add the following dependency to your pom.xml:
 
 ```xml
 <dependency>
@@ -102,29 +104,28 @@ Multicodec: name=ed25519-pub, code=237, varint=[0xED,0x01], tag=Key, status=Draf
 Length:     32 bytes
 ```
 
-## Contributing
+## 🤝 Contributing
 
-All PR's welcome!
-
+Contributions are welcome! Please submit a pull request.
 
 ### Building
 
-Fork and clone the project repository.
+Fork and clone the repository, then build with Maven:
 
 ```bash
 > cd copper-multibase
-> mvn clean package
+> mvn package
 ```
 
 
-## Resources
+## 📚 Resources
 - [Copper Multicodec](https://github.com/filip26/copper-multicodec)
 - [W3C CCG Multibase](https://github.com/w3c-ccg/multibase)
 - [Multiformats Multibase](https://github.com/multiformats/multibase)
 - [java-multibase](https://github.com/multiformats/java-multibase)
 
 
-## Commercial Support
+## 💼 Commercial Support
 
 Commercial support and consulting are available.  
 For inquiries, please contact: filip26@gmail.com
