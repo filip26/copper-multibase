@@ -14,28 +14,20 @@ This design allows encoded data to carry the information needed for correct deco
   - no lookups when encoding
   - direct static access to an encoder
   - configurable set of encodings to support when decoding
-- built-in bases
-  - Base2
-  - Base16 `(lower|upper)`
-  - Base32 `(lower|upper, [no-]padding)`
-  - Base32Hex `(lower|upper, [no-]padding)`
-  - Base58BTC
-  - Base64 `([no-]padding)`
-  - Base64URL `([no-]padding)`
 - no 3rd party dependencies
 - easily extendable
 
-## ⏱️ Time Complexity
+## ⏱️ Algorithms
 
 | Name | Algorithm | $O$ |
 | :--- | :--- | :--- |
 | Base2  | Bitwise Mapping (1-bit) | $O(n)$ |
-| Base16 (lower/upper) | Bitwise Mapping (4-bit) | $O(n)$ |
-| Base32 (lower/upper, [no-]padding) | Bitwise Mapping (5-bit) | $O(n)$ |
-| Base32Hex (lower/upper, [no-]padding) | Bitwise Mapping (5-bit) | $O(n)$ |
+| Base16 `lower/upper` | Bitwise Mapping (4-bit) | $O(n)$ |
+| Base32 `lower/upper, [no-]padding` | Bitwise Mapping (5-bit) | $O(n)$ |
+| Base32Hex `lower/upper, [no-]padding` | Bitwise Mapping (5-bit) | $O(n)$ |
 | Base58BTC | Arbitrary-precision Radix Conversion | $O(n²)$ |
-| Base64 ([no-]padding) | Bitwise Mapping (6-bit) | $O(n)$ |
-| Base64URL ([no-]padding) | Bitwise Mapping (6-bit) | $O(n)$ |
+| Base64 `[no-]padding` | Bitwise Mapping (6-bit) | $O(n)$ |
+| Base64URL `[no-]padding` | Bitwise Mapping (6-bit) | $O(n)$ |
 
 ## 💡 Examples
 ```javascript
