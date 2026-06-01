@@ -121,13 +121,10 @@ Fork and clone the repository, then build with Maven:
 > mvn package
 ```
 
-
 ## 📚 Resources
 - [Copper Multicodec](https://github.com/filip26/copper-multicodec)
 - [W3C CCG Multibase](https://github.com/w3c-ccg/multibase)
 - [Multiformats Multibase](https://github.com/multiformats/multibase)
-- [java-multibase](https://github.com/multiformats/java-multibase)
-
 
 ## 💼 Commercial Support
 
